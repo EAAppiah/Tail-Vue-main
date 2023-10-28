@@ -1,0 +1,5 @@
+<template>
+    <CustomerNavBar />
+    <CustomerSection />
+
+</template>
