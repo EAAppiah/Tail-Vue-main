@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     handleLogin() {
-      if (this.username === "admin" && this.password === "admin") {
+      if (this.username === "" && this.password === "") {
         this.showShiftPopup = true;
       } else {
         this.loginError = "Login failed. Please check your credentials.";
@@ -109,7 +109,7 @@ export default {
       }
     },
     openSignOutDialog() {
-      if (this.username === "admin" && this.password === "admin") {
+      if (this.username === "" && this.password === "") {
         this.showSignOutDialog = true;
       } else {
         this.logoutError = "Logout failed. Please check your credentials.";
