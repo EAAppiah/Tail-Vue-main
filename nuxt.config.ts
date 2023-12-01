@@ -5,6 +5,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss'
   ],
 
+  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
+
   app: {
     head: {
       title: 'Tail-Vue',
@@ -14,7 +16,7 @@ export default defineNuxtConfig({
         {
           hid: 'description',
           name: 'description',
-          content: 'A random project'
+          content: 'A random web app project'
         }
       ]
     }
