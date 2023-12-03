@@ -2,10 +2,10 @@
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss','nuxt-icon'
   ],
 
-  css: ['@fortawesome/fontawesome-svg-core/styles.css'],
+  css: [],
 
   app: {
     head: {

@@ -1,5 +1,4 @@
 <script setup>
-
 // const searchFilter = ref('');
 
 defineProps({
@@ -23,7 +22,7 @@ defineProps({
 // const handleSearch = (search) => {
 // 	searchFilter.value = search;
 // 	if(!search) {
-//     searchFilter.value = ''; 
+//     searchFilter.value = '';
 //   };
 // }
 </script>
@@ -31,7 +30,7 @@ defineProps({
 
 <template>
 	<div class="parent">
-		<div class="div1 card bg-white relative border rounded-lg overflow-y-auto">
+		<div class="div1 card bg-white relative border rounded-lg">
 
 			<!-- Search bar -->
 			<div class="flex items-center justify-between">
@@ -40,11 +39,12 @@ defineProps({
 
 				<!-- Add Manufacturer Btn-->
 				<div class="flex items-center justify-end">
-					<button class="py-1 px-2 bg-green-700 text-white rounded-lg">Add Manufacturer</button>
+					<button class="py-1.5 px-2 bg-indigo-700 text-white font-medium rounded-lg mr-2">Add
+						Manufacturer</button>
 				</div>
 			</div>
 			<!-- MANUFACTURER MODE -->
-			<div>
+			<div class="tableFixHead" style="padding: 0rem 1rem">
 				<table class="w-full text-sm text-left text-gray-300">
 					<thead class="text-xs text-gray-700 uppercase bg-gray-200">
 						<tr>
@@ -58,7 +58,7 @@ defineProps({
 					</thead>
 					<tbody>
 						<tr v-for="manufacturer in manufacturers" :key="manufacturer.id"
-							class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-purple-50 dark:hover:bg-gray-600">
+							class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600">
 							<!-- Show no results -->
 							<!-- <div v-if="!filteredItems.length">
 								No results
@@ -109,5 +109,20 @@ defineProps({
 	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
 		rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 	border-radius: 10px;
+	padding: 15px;
+  border-radius: 10px;
 }
+
+.tableFixHead {
+  overflow-y: auto;
+  height: 72vh;
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  top: 0px;
+	z-index: 1; 
+	background: #E5E7EB;
+}
+
 </style>
