@@ -1,30 +1,34 @@
 <script setup>
-// const searchFilter = ref('');
+const searchFilter = ref('');
 
-defineProps({
+const props = defineProps({
 	manufacturers: {
 		type: Array,
 		required: true
 	}
 });
 
-// const filteredItems = computed(() => {
-// 	let manufacturers = props.manufacturers;
+const editManufacturer = (manufacturer) => {
+	// Edit logic
+}
 
-// 	if (searchFilter.value !== '') {
-// 		manufacturers = manufacturers.filter(manufacturer =>
-// 			manufacturer.fullName.includes(searchFilter.value));
-// 	}
+const deleteManufacturer = (manufacturer) => {
+	// Delete logic 
+}
 
-// 	return manufacturers;
-// });
+const filteredManufacturers = computed(() => {
+	if (!searchFilter.value) {
+		return props.manufacturers
+	}
 
-// const handleSearch = (search) => {
-// 	searchFilter.value = search;
-// 	if(!search) {
-//     searchFilter.value = '';
-//   };
-// }
+	return props.manufacturers.filter(manufacturer => {
+		return manufacturer.fullName.toLowerCase().includes(searchFilter.value.toLowerCase())
+	})
+})
+
+const handleSearch = (searchText) => {
+	searchFilter.value = searchText
+}
 </script>
 
 
@@ -38,10 +42,17 @@ defineProps({
 
 
 				<!-- Add Manufacturer Btn-->
-				<div class="flex items-center justify-end">
-					<button class="py-1.5 px-2 bg-indigo-700 text-white font-medium rounded-lg mr-2">Add
-						Manufacturer</button>
-				</div>
+				<button type="button" @click="OpenWallet"
+					class="text-white bg-indigo-600 hover:bg-indigo-500 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+					<svg aria-hidden="true" class="w-4 h-4 me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+							d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+						</path>
+					</svg>
+					Add Manufacturer
+				</button>
+
 			</div>
 			<!-- MANUFACTURER MODE -->
 			<div class="tableFixHead" style="padding: 0rem 1rem">
@@ -52,12 +63,11 @@ defineProps({
 							<th class="px-4 py-3">Interest</th>
 							<th class="px-4 py-3">Email</th>
 							<th class="px-4 py-3">Phone</th>
-							<th scope="col" class="px-4 py-3 text-center">Payment Details</th>
-							<th scope="col" class="px-4 py-3 text-center"></th>
+							<th scope="col" class="px-4 py-3 text-center">Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="manufacturer in manufacturers" :key="manufacturer.id"
+						<tr v-for="manufacturer in filteredManufacturers" :key="manufacturer.id"
 							class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-blue-50 dark:hover:bg-gray-600">
 							<!-- Show no results -->
 							<!-- <div v-if="!filteredItems.length">
@@ -76,10 +86,13 @@ defineProps({
 							<td class="px-4 py-3 font-medium text-gray-900">{{ manufacturer.isUser }}</td>
 							<td class="px-4 py-3 font-medium text-gray-900">{{ manufacturer.rating }}</td>
 							<td class="px-4 py-3 font-medium text-gray-900">{{ manufacturer.col1 }}</td>
-							<td class="text-center">
-								<a class="text-indigo-600 hover:text-indigo-700 font-medium" href="#">
-									View
-								</a>
+							<td class="text-center d-flex font-medium">
+								<Icon name="twemoji:writing-hand-light-skin-tone" @click="editManufacturer(manufacturer, index)"
+									title="Edit">
+								</Icon>
+								<Icon name="bi:trash3" class="ms-2 text-purple-400" @click="deleteManufacturer(manufacturer)"
+									title="Delete">
+								</Icon>
 							</td>
 							<td>
 							</td>
@@ -110,19 +123,23 @@ defineProps({
 		rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 	border-radius: 10px;
 	padding: 15px;
-  border-radius: 10px;
+	border-radius: 10px;
 }
 
 .tableFixHead {
-  overflow-y: auto;
-  height: 72vh;
+	overflow-y: auto;
+	height: 72vh;
 }
 
 .tableFixHead thead th {
-  position: sticky;
-  top: 0px;
-	z-index: 1; 
+	position: sticky;
+	top: 0px;
+	z-index: 1;
 	background: #E5E7EB;
 }
 
+[title] {
+	position: relative;
+	cursor: pointer;
+}
 </style>
