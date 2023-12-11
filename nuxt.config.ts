@@ -18,7 +18,11 @@ export default defineNuxtConfig({
           name: 'description',
           content: 'A random web app project'
         }
-      ]
+      ],
+      script: [
+        {src: "/jquery-3.6.0.min.js",
+        type: "text/javascript",}
+      ],
     }
   }
 })
