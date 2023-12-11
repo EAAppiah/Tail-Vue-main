@@ -43,8 +43,7 @@ const formatDate = computed(() => {
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(index, user) in users" :key="user.id">
-                <td>{{ user.id }}</td>
+              <tr v-for="user in users" :key="user.id">
 										<td>{{ user.first_name}} {{ user.last_name}}</td>
                 <td>{{ user.hours }}</td>
 <!-- 
