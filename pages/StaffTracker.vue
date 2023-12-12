@@ -1,10 +1,10 @@
 <script setup>
 
-const users = ref([])
+const staffs = ref([])
 
 onMounted( async () => {
-  const response = await fetch('/staff-details.json')
-  users.value = await response.json()
+  const response = await fetch("https://retoolapi.dev/IrtUZC/stafflogs")
+  staffs.value = await response.json()
 });
 
 </script>
@@ -12,6 +12,6 @@ onMounted( async () => {
 
 <template>
     <div>
-        <UserSection :users="users"/>
+        <UserSection :staffs="staffs"/>
     </div>
 </template>

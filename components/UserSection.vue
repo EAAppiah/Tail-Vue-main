@@ -1,104 +1,144 @@
 <script setup>
 
+// DATA PROPERTIES
+const searchFilter = ref('');
+const selectedStaff = ref(null)
+const staff = ref({ rate: 0, hours: 0 })
+
+// DEFINING PROPS
 const props = defineProps({
-	users: {
-		type: Array,
-		required: true
-	}
+  staffs: {
+    type: Array,
+    required: true
+  }
 });
 
-const date = ref(new Date())
-
-const calculateTotal = (user) => {
-  return user.hours * user.rate 
+// SELECTED STAFF 
+const viewStaffDetails = (staff) => {
+    selectedStaffDetails.value = staff;
 }
 
-const formatDate = computed(() => {
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-  const dayOfWeek = days[date.value.getDay()]
-  const month = months[date.value.getMonth()]
-  const dayOfMonth = date.value.getDate()
-
-  return `${dayOfWeek}-${dayOfMonth}-${month}`
+// SETTING RATE
+const rate = computed({
+  get() {
+    return staff.value.rate
+  },
+  set(value) {
+    staff.value.rate = value
+    calculateTotal()
+  }
 })
+
+// CALCULATING TOTALS
+const total = ref(0)
+
+function calculateTotal() {
+  total.value = staff.value.rate * staff.value.hours
+}
+
+// STAFF SEARCH FILTER
+const filteredStaffs = computed(() => {
+  if (!searchFilter.value) {
+    return props.staffs
+  }
+
+  return props.staffs.filter(staff => {
+    return staff.fullName.toLowerCase().includes(searchFilter.value.toLowerCase())
+  })
+})
+
+// Selected Staff Details
+const staffLogs = (staff) => {
+  selectedStaff.value = staff
+}
+
+const handleSearch = (searchText) => {
+  searchFilter.value = searchText
+}
 
 </script>
 
+
 <template>
+  <div class="parent">
+    <div class="div1 card bg-white relative border rounded-lg">
+      <div class="flex items-center justify-between">
+        <!-- Search bar -->
+        <SearchForm @search="handleSearch" />
+        <h2 class="fw-medium fs-5">Staff Details</h2>
+        <DateRange />
+      </div>
 
-<div class="parent">
-  <div class="card div1">
-    <h3>Staff Logs</h3>
+      <!-- STAFF MODE -->
+      <div class="tableFixHead" style="padding: 0rem 1rem">
+        <table class="w-full text-sm text-left text-gray-300">
+          <thead class="text-xs text-indigo-700 uppercase bg-gray-100">
+            <tr @click="selectedStaff = staffs">
+              <th class="px-4 py-3">Date Joined</th>
+              <th class="px-4 py-3">Name</th>
+              <th class="px-4 py-3">Branch</th>
+              <th class="px-4 py-3">Hours</th>
+              <th class="px-4 py-3">Rate</th>
+              <th class="px-4 py-3">Total</th>
+              <th class="px-4 py-3">Logs</th>
+            </tr>
+          </thead>
 
-          <table class="min-w-full text-sm text-left text-gray-300">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-200">
-              <tr>
-                <th>Name</th>
-                <th>Hours</th>
-                <th>Rate</th>
-                <th>Total</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody class="bg-white">
-              <tr v-for="user in users" :key="user.id">
-										<td>{{ user.first_name}} {{ user.last_name}}</td>
-                <td>{{ user.hours }}</td>
-<!-- 
-                <td> 
-                  <input
-                      class="w-full h-full text-sm leading-5 text-gray-900 bg-transparent border-none focus:outline-none"
-                      type="text"
-                      v-model="user.rate"
-                      @input="user.total = calculateTotal(user)"
-                    />
-                </td> -->
-
-                <td>{{ calculateTotal(user).toLocaleString() }}</td>
-
-                <!-- Status Button -->
-                <td>
-                  <button
-                    class="border rounded-md w-16 h-8 flex items-center justify-center bg-purple-600 text-white">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <!-- End of table rows -->
-            </tbody>
-          </table>
-        </div>
-
-  <!-- <div class="card div2">
-    </div> -->
+          <tbody>
+            <tr v-for="staff in filteredStaffs" :key="staff.id" class="border-b">
+              <td class="px-4 py-3 font-medium text-gray-900">{{ staff.date }}</td>
+              <td class="px-4 py-3 font-medium text-gray-900">{{ staff.fullName }}</td>
+              <td class="px-4 py-3 font-medium text-gray-900">{{ staff.branch }}</td>
+              <td class="px-4 py-3 font-medium text-gray-900">{{ staff.hours }}</td>
+              <td class="align-center">
+                <input type="number" class="text-gray-900 rounded-sm w-10 h-6" v-model.number="staff.rate" @input="calculateTotal(staff)">
+              </td>
+              <td class="text-gray-900">
+                {{ (total) }}
+              </td>
+              <td>
+                <button class="bg-orange-500 hover:bg-orange-400 text-white font-normal py-1 px-2 rounded-full"
+                @click="viewStaffDetails(staff)">
+                  View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
-
-
-<style>
+<style scoped>
 .parent {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-grid-template-rows: 1fr;
-grid-column-gap: 10px;
-grid-row-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  margin: 1rem;
 }
 
 .div1 {
-	height: 88vh;
+  height: 88vh;
 }
-.div2 {
-	height: 88vh;
+
+.tableFixHead {
+  overflow-y: auto;
+  height: 72vh;
+}
+.tableFixHead thead th {
+	position: sticky;
+	top: 0px;
+	z-index: 1;
+	background: #F3F4F6;
 }
 
 .card {
-	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-		rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-	border-radius: 10px;
-	padding: 15px;
-	border-radius: 10px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 10px;
 }
 </style>

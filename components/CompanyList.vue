@@ -1,12 +1,38 @@
 <script setup>
-defineProps({
+const searchFilter = ref('');
+const selectedCompany = ref(null);
+
+const props = defineProps({
 	companies: {
 		type: Array,
 		required: true
 	}
 });
+// COMPANY FILTER
+const filteredCompanies = computed(() => {
+	if (!searchFilter.value) {
+		return props.companies
+	}
 
+	return props.companies.filter(company => {
+		return companies.fullName.toLowerCase().includes(searchFilter.value.toLowerCase())
+	})
+})
 
+// SUB-COMPANY FILTER
+const filteredSubCompanies = computed(() => {
+  if (!selectedCompany.value) {
+    return [];
+  }
+
+  return selectedCompany.value.subCompanies.filter(subCompany => {
+    return subCompany.name.toLowerCase().includes(searchFilter.value.toLowerCase());  
+  });
+})
+
+const handleSearch = (searchText) => {
+	searchFilter.value = searchText
+}
 
 </script>
 
@@ -16,14 +42,15 @@ defineProps({
 		<div class="div1 card bg-white relative border rounded-lg">
 			<div class="flex items-center justify-between">
 				<!-- Search bar -->
-					<SearchForm @search="handleSearch"/>
+				<SearchForm @search="handleSearch" />
+				<DateRange/>
 			</div>
 
 			<!-- Company MODE -->
 			<div>
 				<table class="w-full text-sm text-left text-gray-300">
 					<thead class="text-xs text-gray-700 uppercase bg-gray-50">
-						<tr>
+						<tr @click="selectedCompany = company">
 							<th class="px-4 py-3">Name</th>
 							<th class="px-4 py-3">Tel</th>
 							<th class="px-4 py-3">Address</th>
@@ -34,10 +61,10 @@ defineProps({
 					</thead>
 
 					<tbody>
-						<tr v-for="company in companies" :key="company.id" class="border-b">
+						<tr v-for="company in filteredCompanies" :key="company.id" class="border-b">
 							<td class="px-4 py-3 font-medium text-gray-900">{{ company.fullName }}</td>
 							<td class="px-4 py-3 font-medium text-gray-900">{{ company.isUser }}</td>
-							<td>{{ company.rating}}</td>
+							<td>{{ company.rating }}</td>
 							<td>{{ company.E }}</td>
 							<td>{{ company.col1 }}</td>
 							<td class="text-center">
@@ -53,45 +80,39 @@ defineProps({
 
 
 		<!--SUB-COMPANY MODE -->
-		<div class="div2 card card bg-white relative border rounded-lg">
-			<div class="card h-100">
-				<div class="card-body">
-					<div style="margin-top: 10px" class="d-flex justify-content-between align-items-right col-12">
+		<div class="div2 card bg-white relative border rounded-lg">
+				<div class="d-flex justify-content-between align-items-right col-12">
 
-						<div>
-							<h3 class="text-primary">Sub-Companies</h3>
-							<table class="table table-responsive table-hover mt-2">
-								<thead>
-									<tr>
-										<th scope="col" class="text-capitalize text-center fw-normal text-primary col">Name
-										</th>
-										<th scope="col" class="text-capitalize text-center fw-normal text-primary col">Tel
-										</th>
-										<th scope="col" class="text-capitalize text-center fw-normal text-primary col">
-											Address</th>
-										<th scope="col" class="text-capitalize text-center fw-normal text-primary col">
-											Location</th>
-										<th scope="col" class="text-capitalize text-center fw-normal text-primary col">
-											E-mail</th>
-									</tr>
-								</thead>
+					<div class="flex items-center justify-between">
+						<h1 class="text-indigo-500 ms-1 fw-medium">SUB-COMPANIES</h1>
 
-								<tbody v-if="selectedCompany">
-									<tr v-for="subCompany in selectedCompany.subCompanies" :key="subCompany.name">
-										<td>{{ subCompany.name }}</td>
-										<td>{{ subCompany.tel }}</td>
-										<td>{{ subCompany.address }}</td>
-										<td>{{ subCompany.location }}</td>
-										<td>{{ subCompany.email }}</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+						<!-- Search bar -->
+						<SearchForm @search="handleSearch" />
 					</div>
+					<table class="w-full text-sm text-left text-gray-300">
+						<thead class="text-xs text-gray-700 uppercase bg-gray-50">
+							<tr>
+								<th class="px-4 py-3">Name</th>
+								<th class="px-4 py-3">Tel</th>
+								<th class="px-4 py-3">Address</th>
+								<th class="px-4 py-3">Location</th>
+								<th class="px-4 py-3">E-mail</th>
+							</tr>
+						</thead>
+
+						<tbody v-if="selectedCompany">
+							<tr v-for="subCompany in filteredSubCompanies" :key="subCompany.name">
+								<td>{{ subCompany.name }}</td>
+								<td>{{ subCompany.tel }}</td>
+								<td>{{ subCompany.address }}</td>
+								<td>{{ subCompany.location }}</td>
+								<td>{{ subCompany.email }}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-	</div>
 </template>
 
 <style scoped>
