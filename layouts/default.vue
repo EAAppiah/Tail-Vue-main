@@ -1,48 +1,78 @@
 <template>
   <div>
-    <div :class="['sidebar', { active: isSidebarActive }]" @mouseenter="isSidebarActive = true" @mouseleave="isSidebarActive = false">
-      <div class="top">
-        <div class="logo">
-          <nuxt-link to="/company">
-            <img src="~/assets/rigellogo.png" class="rlogo" height="60" width="80"/>
-          </nuxt-link>
-          <span class="rName">X-Vendor</span>
+    <div class="sidebar">
+        <div class="logo_details">
+          <img src="" alt="">
+          <div class="logo_name">Rigelis</div>
+          <i class="bx bx-menu" id="btn"></i>
         </div>
-
-        <nuxt-link to="/company">
-          <img src="~/assets/rigellogo.png" id="btn" />
-        </nuxt-link>
-      </div>
-
-      <div class="userRoleContainer">
-        <ul v-for="(role, index) in allRoles" :key="index">
+        <ul class="nav-list">
           <li>
-            <nuxt-link :to="role.address" :class="{
-              'nav-link': true,
-              active: role.address === selectedRoleAddress,
-            }" @click="selectedRoleAddress = role.address">
-              <div class="role-wrapper">
-                <i class="icon" :class="getRoleIconClass(role.name)"></i>
-                <span class="iconName">{{ role.name }}</span>
+            <i class="bx bx-search"></i>
+            <input type="text" placeholder="Search...">
+             <span class="tooltip">Search</span>
+          </li>
+          <li>
+            <a href="company.html">
+              <i class="bx bx-grid-alt"></i>
+              <span class="link_name">Dashboard</span>
+            </a>
+            <span class="tooltip">Dashboard</span>
+          </li>
+          <li>
+            <a href="#">
+                <i class="fa-solid fa-users"></i>
+              <span class="link_name">Company</span>
+            </a>
+            <span class="tooltip">Company</span>
+          </li>
+          <li>
+            <a href="#">
+                <i class='bx bx-serv782er' ></i>
+              <span class="link_name">Server</span>
+            </a>
+            <span class="tooltip">Server</span>
+          </li>
+          <li>
+            <a href="#">
+                <Icon name="bxs:data"></Icon>
+              <span class="link_name">Database</span>
+            </a>
+            <span class="tooltip">Database</span>
+          </li>
+          <li>
+            <a href="#">
+                <Icon name="fa-solid fa-code-compare"></Icon>
+              <span class="link_name">Version Monitor</span>
+            </a>
+            <span class="tooltip">Version Monitor</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bx bx-cart-alt"></i>
+              <span class="link_name">Products</span>
+            </a>
+            <span class="tooltip">Products</span>
+          </li>
+          <li>
+            <a href="#">
+              <i class="bx bx-cog"></i>
+              <span class="link_name">Settings</span>
+            </a>
+            <span class="tooltip">Settings</span>
+          </li>
+          <li class="profile">
+            <div class="profile_details">
+              <img src="" alt="profile image">
+              <div class="profile_content">
+                <div class="name">Andy Quao</div>
+                <div class="designation">Admin</div>
               </div>
-              <span class="tooltip">{{ role.name }}</span>
-            </nuxt-link>
+            </div>
+            <i class="bx bx-log-out" id="log_out"></i>
           </li>
         </ul>
       </div>
-      <ul class="logoutItem">
-        <li>
-          <nuxt-link to="/" class="nav-link">
-            <div class="role-wrapper">
-              <i class="icon bx bx-user-circle"></i>
-              <span class="iconName">Log Out
-                <i class="icon bx bx-log-out"></i>
-              </span>
-            </div>
-          </nuxt-link>
-        </li>
-      </ul>
-    </div>
     <div class="main-content">
       <slot />
     </div>
@@ -100,312 +130,293 @@ export default {
 };
 </script>
 
-<style scoped>
-.card {
-  background-color: #fff;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  padding: 15px;
-  border-radius: 10px;
-}
-.card2 {
-  background-color: #fff;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
-  padding: 8px 15px;
-  border-radius: 10px;
+<style>
+:root{
+  --color-default: hsl(300, 90%, 36%);
+  --color-second: #550855;
+  --color-white:#fff;
+  --color-body:#e4e9f7;
+  --color-light:#e0e0e0;
 }
 
-.navBar {
-  margin-top: 0.4rem;
-  margin-left: 0.8rem;
-  margin-right: 0.8rem;
-  z-index: 1;
-}
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-.rlogo {
-  width: 50px;
-  border-radius: 100%;
-  margin: 10px;
-}
-
-.rName {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.user.bottom {
-  margin-top: auto;
-}
-
-.user-img {
-  width: 50px;
-  border-radius: 100%;
-  border: 1px solid #eee;
-}
-
-.user-img2 {
-  width: 30px;
-  border-radius: 50%;
-  border: 1px solid #eee;
-}
-
-.sidebar ul li a.active {
-  background-color: hsl(264, 39%, 51%);
-  color: white;
-}
-
-.sidebar {
+.sidebar{
+  min-height: 100vh;
+  width: 78px;
+  padding: 6px 14px;
+  z-index: 99;
+  background-color: var(--color-default);
+  transition: all .5s ease;
   position: fixed;
-  top: 0;
+  top:0;
   left: 0;
-  height: 100vh;
-  width: 70px;
-  background-color: #fff;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  padding: 0.4rem;
-  transition: all 0.5s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  z-index: 3;
 }
 
-.top {
-  height: 8%;
-}
-
-.userRoleContainer {
-  height: 95%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  margin-bottom: 20px;
-}
-
-.adminRoleContainer {
-  background-color: #f1f1f1;
-  margin: 2px;
-  border-radius: 10px;
-  height: 34%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;
-}
-
-.user {
-  height: 8%;
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  margin: 1rem 0;
-}
-
-/* .sidebar.active ~ .main-content {
-  left: 250px;
-  width: calc(100% - 250px);
-} */
-
-.sidebar.active {
+.sidebar.open{
   width: 250px;
 }
 
-.sidebar #btn {
-  position: absolute;
-  top: 0.3rem;
-  left: 50%;
-  /* color: #12171e;
-    font-size: 1.2rem;
-    line-height: 50px; */
-  height: 50px;
-  width: 50px;
-  transform: translateX(-50%);
-  cursor: pointer;
+.sidebar .logo_details{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
-.sidebar.active #btn {
-  /* left: 90%; */
+.sidebar .logo_details .icon{
+  opacity: 0;
+  transition: all 0.5s ease ;
+}
+
+
+
+.sidebar .logo_details .logo_name{
+  color:var(--color-white);
+  font-size: 22px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.sidebar.open .logo_details .icon,
+.sidebar.open .logo_details .logo_name{
+  opacity: 1;
+}
+
+.sidebar .logo_details #btn{
+  position: absolute;
+  top:50%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 23px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+
+.sidebar.open .logo_details #btn{
+  text-align: right;
+}
+
+.sidebar i{
+  color:var(--color-white);
+  height: 60px;
+  line-height: 60px;
+  min-width: 50px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.sidebar .nav-list{
+  margin-top: 20px;
+  height: 100%;
+}
+
+.sidebar li{
+  position: relative;
+  margin:8px 0;
+  list-style: none;
+}
+
+.sidebar li .tooltip{
+  position: absolute;
+  top:-20px;
+  left:calc(100% + 15px);
+  z-index: 3;
+  background-color: var(--color-white);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  padding: 6px 14px;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar li:hover .tooltip{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all 0.4s ease;
+  top:50%;
+  transform: translateY(-50%);
+}
+
+.sidebar.open li .tooltip{
   display: none;
 }
 
-.sidebar .top .logo {
-  color: #12171e;
+.sidebar input{
+  font-size: 15px;
+  color: var(--color-white);
+  font-weight: 400;
+  outline: none;
+  height: 35px;
+  width: 35px;
+  border:none;
+  border-radius: 5px;
+  background-color: var(--color-second);
+  transition: all .5s ease;
+}
+
+.sidebar input::placeholder{
+  color:var(--color-light)
+}
+
+.sidebar.open input{
+  width: 100%;
+  padding: 0 20px 0 50px;
+}
+
+.sidebar .bx-search{
+  position: absolute;
+  top:50%;
+  left:0;
+  transform: translateY(-50%);
+  font-size: 22px;
+  background-color: var(--color-second);
+  color: var(--color-white);
+}
+
+.sidebar li a{
   display: flex;
-  height: 50px;
+  height: 100%;
   width: 100%;
   align-items: center;
+  text-decoration: none;
+  background-color: var(--color-default);
+  position: relative;
+  transition: all .5s ease;
+  z-index: 12;
+}
+
+.sidebar li a::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  background-color: var(--color-white);
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: left;
+  z-index: -2;
+}
+
+.sidebar li a:hover::after{
+  transform: scaleX(1);
+  color:var(--color-default)
+}
+
+.sidebar li a .link_name{
+  color:var(--color-white);
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  pointer-events: auto;
+  transition: all 0.4s ease;
   pointer-events: none;
   opacity: 0;
 }
 
-.sidebar.active .top .logo {
-  opacity: 1;
-}
-
-.top .logo i {
-  font-size: 2rem;
-  margin-right: 5px;
-}
-
-.user {
-  display: flex;
-  align-items: center;
-  margin: 1rem 0;
-}
-
-.user p {
-  color: #12171e;
-  opacity: 1;
-  margin-left: 1rem;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.sidebar p {
-  opacity: 0;
-}
-
-.sidebar.active p {
-  opacity: 1;
-}
-
-.userLogOut {
-  opacity: 0;
-  margin-left: 20px;
-  font-size: 30px;
-  display: flex;
-  justify-items: end;
-  color: hsl(331, 100%, 50%);
-}
-
-.userLogOut2 {
-  margin-left: 20px;
-  font-size: 30px;
-  display: flex;
-  justify-items: end;
-  color: hsl(331, 100%, 50%);
-}
-
-.sidebar.active .userLogOut {
-  opacity: 1;
-}
-
-/* ===CHANGE THIS==== */
-.sidebar ul li {
-  position: relative;
-  list-style-type: none;
-  height: 50px;
-  width: 90%;
-  margin: 0.4rem auto;
-  line-height: 30px;
-}
-
-.icon {
-  font-size: 20px;
-}
-
-.role-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.iconName {
-  display: inline-block;
-  vertical-align: middle;
-  opacity: 0;
-  margin-left: 10px;
-}
-
-.sidebar.active ul li a .iconName {
-  opacity: 1;
-  font-size: 15px;
-}
-
-.sidebar ul li a {
-  width: 90%;
-  color: hsl(264, 39%, 51%);
-  display: flex;
-  text-decoration: none;
-  border-radius: 0.8rem;
-}
-
-.sidebar ul li a:hover {
-  background-color: hsl(264, 39%, 51%);
-  color: #fff;
-  font-size: 25px;
-}
-
-.sidebar ul li a i {
-  text-align: left;
-  height: 50px;
-  min-width: 50px;
-  border-radius: 15px;
-  line-height: 50px;
-  padding-left: 10px;
-}
-
-.sidebar .nav-item {
-  opacity: 0;
-}
-
-.sidebar.active .nav-item {
-  opacity: 1;
-}
-
-.sidebar ul li .tooltip {
-  background-color: #fff;
-  position: absolute;
-  left: 125px;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  border-radius: 0.6rem;
-  padding: 0.4rem 1.2rem;
-  line-height: 1.8rem;
-  opacity: 0;
-}
-
-.sidebar ul li:hover .tooltip {
-  opacity: 1;
-  color: hsl(264, 39%, 51%);
-}
-
-.sidebar.active ul li .tooltip {
-  display: none;
-}
-
-.main-content {
-  position: relative;
-  height: 100vh;
-  top: 0;
-  left: 70px;
+.sidebar li a:hover .link_name,
+.sidebar li a:hover i{
   transition: all 0.5s ease;
-  width: calc(100% - 70px);
-  /* background: rgba(254, 255, 255, 0.49);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(17.1px);
-    -webkit-backdrop-filter: blur(17.1px); */
+  color:var(--color-default)
 }
 
-.logoutItem {
-  margin-top: auto;
-  margin-bottom: 15px;
+.sidebar.open li a .link_name{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar li i{
+  height: 35px;
+  line-height: 35px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.sidebar li.profile{
+  position: fixed;
+  height: 60px;
+  width: 78px;
+  left: 0;
+  bottom:-8px;
+  padding:10px 14px;
+  overflow: hidden;
+  transition: all .5s ease;
+}
+
+.sidebar.open li.profile{
+  width: 250px;
+}
+
+.sidebar .profile .profile_details{
+  display: flex;
+  align-items: center;
+  flex-wrap:  nowrap;
+}
+
+.sidebar li img{
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.sidebar li.profile .name,
+.sidebar li.profile .designation{
+  font-size: 15px;
+  font-weight: 400;
+  color:var(--color-white);
+  white-space: nowrap;
+}
+
+.sidebar li.profile .designation{
+  font-size: 12px;
+}
+
+.sidebar .profile #log_out{
+  position: absolute;
+  top:50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: var(--color-second);
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.sidebar.open .profile #log_out{
+  width: 50px;
+  background: none;
+}
+
+.home-section{
+  position: relative;
+  background-color: var(--color-body);
+  min-height: 100vh;
+  top:0;
+  left:78px;
+  width: calc(100% - 78px);
+  transition: all .5s ease;
+  z-index: 2;
+}
+
+.home-section .text{
+  display: inline-block;
+  color:var(--color-default);
+  font-size: 25px;
+  font-weight: 500;
+  margin: 18px;
+}
+
+.sidebar.open ~ .home-section{
+  left:250px;
+  width: calc(100% - 250px);
 }
 </style>
