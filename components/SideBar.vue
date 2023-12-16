@@ -3,7 +3,7 @@
 		<div :class="{ 'sidebar': true, 'open': isSidebarOpen }">
 			<div class="sidebar">
 				<div class="logo_details">
-					<img src="" alt="">
+					<img src="../assets/image/AdonisJS.png" alt="Adonis logo">
 					<div class="logo_name">Xtralis</div>
 					<i class="bx bx-menu" id="btn" @click="isSidebarOpen = !isSidebarOpen"></i>
 				</div>
@@ -268,7 +268,7 @@ input[type="text"],
 	z-index: 12;
 }
 
-.sidebar li a::after {
+.sidebar.open li a::after {
 	content: "";
 	position: absolute;
 	width: 500%;
@@ -281,7 +281,7 @@ input[type="text"],
 	z-index: -2;
 }
 
-.sidebar li a:hover::after {
+.sidebar.open li a:hover::after {
 	transform: scaleX(1);
 	color: #E8EAED;
 }
