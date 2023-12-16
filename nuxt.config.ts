@@ -10,6 +10,9 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Tail-Vue',
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.ico' }
+      ],
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
