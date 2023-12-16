@@ -1,16 +1,3 @@
 <template>
-  <div>
-    <LineChart :chart-data="chartData" :options="chartOptions"/>
-  </div>
+    <div>Hello</div>
 </template>
-
-<script>
-
-</script>
-
-<style>
-* {
-  text-align: center;
-  margin-top: 60px;
-}
-</style>
