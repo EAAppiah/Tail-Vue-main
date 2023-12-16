@@ -79,7 +79,7 @@
 					</li>
 					<li class="profile">
 						<div class="profile_details">
-							<img src="" alt="profile image">
+							<img src="../assets/image/♡ Luffy ♡.jpeg" alt="profile image">
 							<div class="profile_content">
 								<div class="name">John Doe</div>
 								<div class="designation">Admin</div>
@@ -359,7 +359,7 @@ input[type="text"],
 
 .sidebar .profile #log_out {
 	position: absolute;
-	top: 70%;
+	top: 60%;
 	right: 0;
 	transform: translateY(-50%);
 	background-color: hsl(210, 14%, 97%);
