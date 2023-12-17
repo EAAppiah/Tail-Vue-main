@@ -1,10 +1,10 @@
 <script setup>
-// const companies = ref([]);
+const companies = ref([]);
 
-// onMounted( async () => {
-// 	const response = await fetch("https://api-generator.retool.com/EfUZX7/companylist");
-// 	companies.value = await response.json();
-// });
+onMounted( async () => {
+	const response = await fetch("https://api-generator.retool.com/EfUZX7/companylist");
+	companies.value = await response.json();
+});
 
 </script>
 11

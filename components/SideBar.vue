@@ -103,9 +103,6 @@ export default {
 		};
 	},
 	methods: {
-		toggleSidebar() {
-			this.isSidebarOpen = !this.isSidebarOpen;
-		},
 	},
 };
 </script>
@@ -300,7 +297,7 @@ input[type="text"],
 .sidebar li a:hover .link_name,
 .sidebar li a:hover i {
 	transition: all 0.5s ease;
-	color: hsl(204, 79%, 47%);
+	color: hsl(247, 100%, 63%);
 }
 
 .sidebar.open li a .link_name {

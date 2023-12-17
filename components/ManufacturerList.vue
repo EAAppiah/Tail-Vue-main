@@ -78,14 +78,14 @@ const handleSearch = (searchText) => {
 									<div class="flex-shrink-0 w-10 h-10">
 										<img class="w-full h-full rounded-full" :src="manufacturer.col2" alt="" />
 									</div>
-									<div class="px-4 py-3 font-medium text-gray-900">
+									<div class="px-4 py-3 font-medium">
 										<p>{{ manufacturer.fullName }}</p>
 									</div>
 								</div>
 							</td>
-							<td class="px-4 py-3 font-medium text-gray-900">{{ manufacturer.isUser }}</td>
-							<td class="px-4 py-3 font-medium text-gray-900">{{ manufacturer.rating }}</td>
-							<td class="px-4 py-3 font-medium text-gray-900">{{ manufacturer.col1 }}</td>
+							<td class="px-4 py-3 font-medium">{{ manufacturer.isUser }}</td>
+							<td class="px-4 py-3 font-medium">{{ manufacturer.rating }}</td>
+							<td class="px-4 py-3 font-medium">{{ manufacturer.col1 }}</td>
 							<td class="text-center d-flex font-medium">
 								<Icon name="twemoji:writing-hand-light-skin-tone" @click="editManufacturer(manufacturer, index)"
 									title="Edit">

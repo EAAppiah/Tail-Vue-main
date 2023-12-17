@@ -1,10 +1,15 @@
 <template>
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-2 my-2">
+	<div class="parent">
+		<div
+			class="div1 card bg-white relative border rounded-lg border-gray-300 md:rounded-lg shadow-xl align-middle inline-block min-w-full">
 
-		<!-- Customer Display Form -->
-		<div class="max-w-md p-6 border border-gray-300 md:rounded-lg shadow-xl align-middle inline-block min-w-full">
-			<h3 class="text-left text-xl font-normal text-purple-500 mb-2">PERSONAL INFO:</h3>
-			<div style="display: flex; justify-content: space-between; font-size: 14px;" class="personal-info text-xl">
+			<!-- SEARCH FORM -->
+			<SearchForm />
+
+			<!-- Customer Display Form -->
+			<div class="p-6">
+			<h4 class="text-left text-md font-bold text-purple-900 mb-2">Personal Information:</h4>
+			<div style="display: flex; justify-content: space-between; font-size: 12px;" class="personal-info">
 				<div>
 					<strong>Name:</strong> <span>{{ customer.name }}</span>
 				</div>
@@ -16,8 +21,8 @@
 				</div>
 			</div>
 
-			<h3 class="text-left text-xl text-purple-500 font-normal mt-3">MEDICAL INFO:</h3>
-			<div style="display: flex; justify-content: space-between; font-size: 14px;" class="personal-info text-xl">
+			<h3 class="text-left text-medium text-purple-900 font-bold mt-3 mb-2">Medical Information:</h3>
+			<div style="display: flex; justify-content: space-between; font-size: 12px;" class="personal-info">
 				<div class="mb-4">
 					<strong>Insurance Provider:</strong> <span>{{ customer.insuranceProvider }}</span>
 				</div>
@@ -30,13 +35,13 @@
 			</div>
 
 			<!--CUSTOMER REFILL TABLE-->
-			<div class="flex flex-col mt-8">
+			<div class="flex flex-col">
 				<div class="-my-2 py-2 overflow-x-auto md:-mx-4 md:px-4 lg:-mx-8 lg:px-8">
 					<div class="align-middle inline-block min-w-full shadow overflow-hidden md:rounded-lg border border-gray-300">
 						<h1 class="text-center text-xl font-medium text-purple-700 my-2">CUSTOMER REFILLS</h1>
 						<table class="min-w-full">
 							<!-- TABLE header -->
-							<thead>
+							<thead class="text-xs uppercase">
 								<tr>
 									<th class="px-4 py-2 border-b bg-gray-100 text-xs">
 										Date
@@ -89,133 +94,121 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
-
+	</div>
 
 		<!-- PURCHASE HISTORY TABLE -->
 
-		<div class="sm:mt-0">
+		<div class="div2 card bg-white relative border rounded-lg">
 			<div class="flex flex-col">
 				<div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+					<h1 class="text-center text-xl font-medium text-purple-700 mt-2 mb-4">PURCHASE HISTORY</h1>
+
 					<div
-						class="custom-min-width align-middle inline-block border border-gray-300 sm:rounded-lg shadow-lg overflow-hidden">
-						<h1 class="text-center text-xl font-medium text-purple-700 mt-2 mb-4">PURCHASE HISTORY</h1>
-
-						<div
-							class="border border-gray-300 shadow flex flex-col md:flex-row justify-around p-2 my-4 mx-4 overflow-hidden sm:rounded-lg">
-							<span class="text-center">
-								Total
-								<span class="font-bold">
-									Cost
-								</span>
-								<br>
-								<span class="font-bold text-green-500">
-									GHS {{ totalCost.toFixed(2) }}
-								</span>
+						class="border border-gray-300 shadow flex flex-col md:flex-row justify-around p-2 my-4 mx-4 overflow-hidden sm:rounded-lg">
+						<span class="text-center">
+							Total
+							<span class="font-bold">
+								Cost
 							</span>
-
-							<span class="text-center mt-4 md:mt-0">
-								Total
-								<span class="font-bold">
-									Paid
-								</span>
-								<br>
-								<span class="font-bold text-blue-500">
-									GHS {{ totalPaid.toFixed(2) }}
-								</span>
+							<br>
+							<span class="font-bold text-green-500">
+								GHS {{ totalCost.toFixed(2) }}
 							</span>
+						</span>
 
-							<span class="text-center mt-4 md:mt-0">
-								Total
-								<span class="font-bold">
-									Balance <!--Balance-->
-								</span>
-								<br>
-								<span class="font-bold text-red-500">
-									GHS {{ balance.toFixed(2) }}
-								</span>
+						<span class="text-center mt-4 md:mt-0">
+							Total
+							<span class="font-bold">
+								Paid
 							</span>
-						</div>
+							<br>
+							<span class="font-bold text-blue-500">
+								GHS {{ totalPaid.toFixed(2) }}
+							</span>
+						</span>
 
-						<table class="min-w-full">
-							<!-- Table header -->
-							<thead>
-								<tr>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										Date
-									</th>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										Receipt
-									</th>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										#Prod <!--Product Amount-->
-									</th>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										Cost
-									</th>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										Disc% <!--Discount-->
-									</th>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										Amt Paid
-									</th>
-									<th class="px-4 py-2 border-b bg-gray-100">
-										Bal <!--Balance-->
-									</th>
-								</tr>
-							</thead>
-
-							<tbody class="bg-white">
-								<!-- Table rows -->
-								<tr v-for="(purchase, index) in purchases" :key="index">
-									<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-										<div class="text-center font-medium text-gray-900">
-											{{ purchase.date }}
-										</div>
-									</td>
-									<td class="px-4 py-2 flex justify-center items-center whitespace-no-wrap border-b border-gray-200">
-										<button
-											class="px-2 py-1 bg-purple-500 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:ring-purple-300"
-											@click="openReceiptPopup(purchase)">View
-										</button>
-									</td>
-									<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-										<div class="text-center font-medium text-gray-900">
-											{{ purchase.productNumber }}
-										</div>
-									</td>
-									<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-										<div class="text-center font-medium text-gray-900">
-											{{ purchase.cost.toLocaleString() }}
-										</div>
-									</td>
-									<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-										<div class="text-center font-medium text-gray-900">
-											{{ purchase.disc.toLocaleString() }}
-										</div>
-									</td>
-									<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-										<div class="text-center font-medium text-gray-900">
-											{{ purchase.amtPaid.toLocaleString() }}
-										</div>
-									</td>
-									<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-										<div class="text-center font-medium text-gray-900">
-											{{ purchase.bal.toLocaleString() }}
-										</div>
-									</td>
-									<!-- Add more table cells for other columns -->
-								</tr>
-								<!-- End of table rows -->
-							</tbody>
-							<!-- End of table body -->
-						</table>
+						<span class="text-center mt-4 md:mt-0">
+							Total
+							<span class="font-bold">
+								Balance <!--Balance-->
+							</span>
+							<br>
+							<span class="font-bold text-red-500">
+								GHS {{ balance.toFixed(2) }}
+							</span>
+						</span>
 					</div>
+
+					<table class="min-w-full">
+						<!-- Table header -->
+						<thead class="text-xs uppercase">
+							<tr>
+								<th class="px-4 py-2 border-b bg-gray-100">
+									Date
+								</th>
+								<th class="px-4 py-2 border-b bg-gray-100">
+									Receipt
+								</th>
+								<th class="px-4 py-2 border-b bg-gray-100">
+									Cost
+								</th>
+								<th class="px-4 py-2 border-b bg-gray-100">
+									Disc%
+								</th>
+								<th class="px-4 py-2 border-b bg-gray-100">
+									Amt Paid
+								</th>
+								<th class="px-4 py-2 border-b bg-gray-100">
+									Bal <!--Balance-->
+								</th>
+							</tr>
+						</thead>
+
+						<tbody class="bg-white">
+							<!-- Table rows -->
+							<tr v-for="(purchase, index) in purchases" :key="index">
+								<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+									<div class="text-center font-medium text-gray-900">
+										{{ purchase.date }}
+									</div>
+								</td>
+								<td class="px-4 py-2 flex justify-center items-center whitespace-no-wrap border-b border-gray-200">
+									<button
+										class="px-2 py-1 bg-purple-600 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:ring-purple-300"
+										@click="openReceiptPopup(purchase)">View
+									</button>
+								</td>
+								<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+									<div class="text-center font-medium text-gray-900">
+										{{ purchase.cost.toLocaleString() }}
+									</div>
+								</td>
+								<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+									<div class="text-center font-medium text-gray-900">
+										{{ purchase.disc.toLocaleString() }}
+									</div>
+								</td>
+								<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+									<div class="text-center font-medium text-gray-900">
+										{{ purchase.amtPaid.toLocaleString() }}
+									</div>
+								</td>
+								<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+									<div class="text-center font-medium text-gray-900">
+										{{ purchase.bal.toLocaleString() }}
+									</div>
+								</td>
+								<!-- Add more table cells for other columns -->
+							</tr>
+							<!-- End of table rows -->
+						</tbody>
+						<!-- End of table body -->
+					</table>
 				</div>
 			</div>
-			<!-- End of Table -->
 		</div>
+		<!-- End of Table -->
 	</div>
 
 	<!-- RECEIPT POPUP -->
@@ -224,32 +217,32 @@
 			<div class="relative">
 				<button class="absolute top-[-1.9rem] right-[-1.9rem] px-2 py-1 bg-red-500 text-white rounded-md"
 					@click="closeReceiptPopup">&times;</button>
-				<h2 class="text-lg font-semibold">{{ selectedPurchaseForReceipt.receipt }} Receipt</h2>
+				<h2 class="text-lg font-normal"> Receipt</h2>
 				<table class="min-w-full mt-4">
-					<thead>
+					<thead class="text-indigo-700 text-xs bg-gray-100">
 						<tr>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Product
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Qty
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Unit
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Cost
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Disc
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Amt Paid
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Bal <!--Balance-->
 							</th>
-							<th class="px-4 py-2 border-b bg-gray-100 text-xs">
+							<th class="px-4 py-2 border-b">
 								Returns
 							</th>
 						</tr>
@@ -258,37 +251,37 @@
 						<!-- Loop through user's status details -->
 						<tr v-for="(receiptDetail, index) in selectedPurchaseForReceipt.receiptDetails" :key="index">
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.product }}
 								</div>
 							</td>
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.quantity }}
 								</div>
 							</td>
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.unit }}
 								</div>
 							</td>
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.cost }}
 								</div>
 							</td>
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.disc }}
 								</div>
 							</td>
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.amtPaid }}
 								</div>
 							</td>
 							<td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-								<div class="text-center font-medium text-gray-900">
+								<div class="text-center">
 									{{ receiptDetail.bal }}
 								</div>
 							</td>
@@ -320,7 +313,7 @@
 				</table>
 				<div class="receipt__btn">
 					<button
-						class="px-2 py-1 flex justify-center bg-yellow-500 font-bold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-yellow-300"
+						class="px-2 py-1 flex justify-center bg-yellow-400 font-bold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-yellow-300"
 						@click="openMomoPopup">Momo</button>
 					<button
 						class="px-2 py-1 flex justify-center bg-green-500 font-bold text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300"
@@ -608,16 +601,42 @@ body {
 	height: 100%;
 }
 
+.parent {
+	display: grid;
+	grid-template-columns: 1.2fr 1fr;
+	grid-template-rows: 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 0px;
+	margin: 1rem;
+}
+
+.div1 {
+	grid-area: 1 / 1 / 2 / 2;
+	height: 88vh;
+}
+
+.div2 {
+	grid-area: 1 / 2 / 2 / 3;
+	height: 88vh;
+}
+
 .personal-info span {
-	font-size: 16px;
+	font-size: 13px;
+	color: #000;
 }
 
 table {
 	font-size: 12px;
 	max-height: calc(100% - 2rem);
-	/* Adjust this value as needed */
 	overflow-y: auto;
 
+}
+
+.card {
+	background-color: #fff;
+	box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+		rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+	border-radius: 10px;
 }
 
 .receipt__btn {
@@ -626,24 +645,17 @@ table {
 	justify-content: space-between;
 }
 
-th {
-	font-size: 16px;
-}
-
 .total-cell {
 	background-color: #f0f0f0;
-	/* Change this to the background color you prefer */
 	font-weight: bold;
 	color: #333;
 }
 
 .grid {
 	height: calc(95vh - 4rem);
-	/* Adjust this value as needed */
 	overflow: hidden;
 }
 
-/* Set a fixed height for the customer display and purchase history sections */
 .max-w-md {
 	height: 100%;
 	display: flex;

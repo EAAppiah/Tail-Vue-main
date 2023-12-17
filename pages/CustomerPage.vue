@@ -1,5 +1,3 @@
 <template>
-    <CustomerNavBar />
     <CustomerSection />
-
 </template>
