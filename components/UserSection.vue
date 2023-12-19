@@ -4,6 +4,7 @@
 const searchFilter = ref('');
 const selectedStaff = ref(null)
 const staff = ref({ rate: 0, hours: 0 })
+import {handleSearch} from './ManufacturerList'
 
 // DEFINING PROPS
 const props = defineProps({
@@ -93,7 +94,7 @@ const handleSearch = (searchText) => {
                 {{ (total) }}
               </td>
               <td>
-                <button class="bg-orange-500 hover:bg-orange-400 text-white font-normal py-1 px-2 rounded-full"
+                <button class="px-2 py-1 bg-orange-600 text-white rounded-md hover:bg-orange-500 focus:outline-none focus:ring focus:ring-orange-300"
                   @click="viewStaffDetails(staff)">
                   View
                 </button>

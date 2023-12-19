@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss','nuxt-icon',
   ],
-
   css: [],
 
   app: {
@@ -23,6 +22,6 @@ export default defineNuxtConfig({
         }
       ],
     }
-  }
+  },
 })
 

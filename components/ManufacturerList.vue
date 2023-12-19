@@ -26,7 +26,7 @@ const filteredManufacturers = computed(() => {
 	})
 })
 
-const handleSearch = (searchText) => {
+export const handleSearch = (searchText) => {
 	searchFilter.value = searchText
 }
 </script>

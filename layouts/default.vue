@@ -1,3 +1,33 @@
+<script setup>
+import { onMounted } from 'vue'
+import { 
+    initAccordions, 
+    initCarousels, 
+    initCollapses, 
+    initDials, 
+    initDismisses, 
+    initDrawers, 
+    initDropdowns, 
+    initModals, 
+    initPopovers, 
+    initTabs, 
+    initTooltips } from 'flowbite'
+1
+onMounted(() => {
+    initAccordions();
+    initCarousels();
+    initCollapses();
+    initDials();
+    initDismisses();
+    initDrawers();
+    initDropdowns();
+    initModals();
+    initPopovers();
+    initTabs();
+    initTooltips();
+})
+</script>
+
 <template>
   <SideBar />
   <div class="home-section">
@@ -6,7 +36,7 @@
 </template>
 
 <style>
- .home-section {
+.home-section {
     position: relative;
     min-height: 100vh;
     top: 0;
@@ -26,4 +56,5 @@
   .sidebar.open~.home-section {
     left: 250px;
     width: calc(100% - 250px);
-  }</style>
+  }
+</style>
