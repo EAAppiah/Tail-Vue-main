@@ -4,7 +4,7 @@
 const searchFilter = ref('');
 const selectedStaff = ref(null)
 const staff = ref({ rate: 0, hours: 0 })
-import {handleSearch} from './ManufacturerList'
+// import {handleSearch} from './ManufacturerList'
 
 // DEFINING PROPS
 const props = defineProps({
@@ -61,7 +61,7 @@ const handleSearch = (searchText) => {
       <div class="flex items-center justify-between">
         <!-- Search bar -->
         <SearchForm @search="handleSearch" />
-        <h2 class="fw-medium fs-5">Staff Details</h2>
+        <h2 class="fw-bold fs-5">Staff Details</h2>
         <DateRange />
       </div>
 

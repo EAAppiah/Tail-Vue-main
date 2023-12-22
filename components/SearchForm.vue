@@ -1,4 +1,5 @@
 <script setup>
+import 'boxicons/css/boxicons.min.css';
 
 const emit = defineEmits(['search']);
 
@@ -12,7 +13,7 @@ const search = (e) => {
     <label class="sr-only">Search</label>
     <div class="relative w-full">
       <input type="text" id="table-search" @input="search" placeholder="Search..." class="block py-1 ps-7 bg-gray-50 rounded-md w-70 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 dark:text-white dark:focus:ring-blue-500">
-      <Icon name="uiw:search" class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500"></Icon>
+      <i class="bx bx-search absolute left-2 top-1/2 transform -translate-y-1/2 text-xl text-gray-400"></i>
     </div>
   </form>
 </template>

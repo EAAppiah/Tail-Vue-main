@@ -81,7 +81,7 @@
 						<div class="profile_details">
 							<img src="../assets/image/♡ Luffy ♡.jpeg" alt="profile image">
 							<div class="profile_content">
-								<div class="name">John Doe</div>
+								<div class="name">Joy Boy</div>
 								<div class="designation">Admin</div>
 							</div>
 						</div>
