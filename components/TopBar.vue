@@ -22,8 +22,8 @@
           </div>
           <!-- ========= log out ====== -->
           <div>
-            <Icon name="iconoir:download" class="text-indigo-500 text-bold"></Icon>
-            <Icon name="icon-park:printer"></Icon>
+            <!-- <Download /> -->
+            <!-- <Print /> -->
           </div>
         </div>
       </div>
@@ -104,6 +104,11 @@ export default {
 
 <style scoped>
 
+@media print {
+  .navBar {
+    display: none;
+  }
+}
 .navBar {
   margin-top: 0.4rem;
   margin-left: 0.8rem;
@@ -129,4 +134,7 @@ export default {
   border-radius: 50%;
   border: 1px solid #eee;
 }
+/* .button_1 {
+  position: relative;
+} */
 </style>

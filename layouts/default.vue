@@ -35,6 +35,9 @@ onMounted(() => {
     <div>
       <TopBar />
     </div>
+    <div>
+    <Options />
+  </div>
     <slot />
   </div>
 </template>

@@ -108,6 +108,11 @@ export default {
 </script>
   
 <style scoped>
+@media print {
+	.sidebar {
+		display: none;
+	}
+}
 .sidebar {
 	min-height: 100vh;
 	width: 70px;

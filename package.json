@@ -19,6 +19,7 @@
     "alpinejs": "^3.13.3",
     "boxicons": "^2.1.4",
     "flowbite": "^2.2.0",
+    "jspdf": "^2.5.1",
     "vee-validate": "^4.11.7"
   }
 }
