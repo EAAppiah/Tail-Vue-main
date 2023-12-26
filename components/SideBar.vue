@@ -85,7 +85,9 @@
 								<div class="designation">Admin</div>
 							</div>
 						</div>
-						<i class="bx bx-log-out" id="log_out"></i>
+						<div>
+							<i class="bx bxs-chevrons-right log_out" @click="isSidebarOpen = !isSidebarOpen"></i>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -113,6 +115,7 @@ export default {
 		display: none;
 	}
 }
+
 .sidebar {
 	min-height: 100vh;
 	width: 70px;
@@ -164,12 +167,14 @@ export default {
 	text-align: center;
 	cursor: pointer;
 	transition: all .5s ease;
+	opacity: 0;
 }
 
 .sidebar.open .logo_details #btn {
 	text-align: right;
 	top: 30px;
 	left: 400%;
+	opacity: 1
 }
 
 .sidebar i {
@@ -241,11 +246,12 @@ export default {
 	width: 500%;
 	padding: 0 20px 0 50px;
 }
+
 input[type="text"],
 .form-select,
 .input-file {
-  border: none;
-  /* Change #555 to your desired darker color */
+	border: none;
+	/* Change #555 to your desired darker color */
 }
 
 .sidebar .bx-search {
@@ -359,7 +365,7 @@ input[type="text"],
 	font-weight: 400;
 }
 
-.sidebar .profile #log_out {
+.sidebar .profile .log_out {
 	position: absolute;
 	top: 60%;
 	right: 0;
@@ -373,8 +379,12 @@ input[type="text"],
 	transition: all 0.5s ease;
 }
 
-.sidebar.open .profile #log_out {
+.sidebar.open .profile .log_out {
 	width: 20px;
 }
+
+.sidebar .profile .log_out:hover {
+	transition: all 0.5s ease;
+	color: hsl(247, 100%, 63%);
+}
 </style>
-  

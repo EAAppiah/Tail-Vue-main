@@ -95,7 +95,6 @@ const handleSearch = (searchText) => {
 								<th class="px-4 py-3">Name</th>
 								<th class="px-4 py-3">Tel</th>
 								<th class="px-4 py-3">Address</th>
-								<th class="px-4 py-3">Location</th>
 								<th class="px-4 py-3">E-mail</th>
 							</tr>
 						</thead>

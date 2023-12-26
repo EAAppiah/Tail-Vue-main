@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/tailwindcss','nuxt-icon',
+    '@nuxtjs/tailwindcss','nuxt-icon','@sidebase/nuxt-pdf'
   ],
   css: [],
 
