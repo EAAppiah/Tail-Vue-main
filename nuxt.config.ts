@@ -23,5 +23,10 @@ export default defineNuxtConfig({
       ],
     }
   },
+
+  plugins: [
+    // ...
+    { src: '~/plugins/flowbite.client.ts', mode: 'client' },
+  ],
 })
 

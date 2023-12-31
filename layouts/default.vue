@@ -1,32 +1,31 @@
 <script setup>
-import { onMounted } from 'vue'
-import {
-  initAccordions,
-  initCarousels,
-  initCollapses,
-  initDials,
-  initDismisses,
-  initDrawers,
-  initDropdowns,
-  initModals,
-  initPopovers,
-  initTabs,
-  initTooltips
-} from 'flowbite'
-1
-onMounted(() => {
-  initAccordions();
-  initCarousels();
-  initCollapses();
-  initDials();
-  initDismisses();
-  initDrawers();
-  initDropdowns();
-  initModals();
-  initPopovers();
-  initTabs();
-  initTooltips();
-})
+// import {
+//   initAccordions,
+//   initCarousels,
+//   initCollapses,
+//   initDials,
+//   initDismisses,
+//   initDrawers,
+//   initDropdowns,
+//   initModals,
+//   initPopovers,
+//   initTabs,
+//   initTooltips
+// } from 'flowbite'
+
+// onMounted(() => {
+//   initAccordions();
+//   initCarousels();
+//   initCollapses();
+//   initDials();
+//   initDismisses();
+//   initDrawers();
+//   initDropdowns();
+//   initModals();
+//   initPopovers();
+//   initTabs();
+//   initTooltips();
+// })
 </script>
 
 <template>
@@ -42,7 +41,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style >
 .home-section {
   position: relative;
   height: 100vh;
