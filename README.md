@@ -1,2 +1,2 @@
 # Project--0
- A new platform that handles purchases, sales and so many more
+An App that summarizes my coding activity and individual projects from October 2023.

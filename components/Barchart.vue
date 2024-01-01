@@ -1,5 +1,7 @@
 <template>
-  <Bar :data="data" :options="options" />
+  <Bar 
+    :data="data" 
+    :options="options" />
 </template>
 
 <script lang="ts">
@@ -13,7 +15,7 @@ import {
   LinearScale
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
-import * as pvsConfig from '~/plugins/pvsConfig'
+import * as pvsConfig from '../pvsConfig'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 

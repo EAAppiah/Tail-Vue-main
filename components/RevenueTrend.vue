@@ -14,7 +14,7 @@ import {
   Legend
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import * as revenueChartConfig from '~/plugins/revenueChartConfig'
+import * as revenueChartConfig from '../revenueChartConfig'
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +27,10 @@ ChartJS.register(
 )
 
 export default {
+  name: 'App',
+  components: {
+    Line
+  },
   data() {
     return revenueChartConfig
   }
