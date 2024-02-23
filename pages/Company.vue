@@ -7,7 +7,7 @@ onMounted( async () => {
 });
 
 </script>
-11
+
 <template>
 	<CompanyList :companies="companies"/>
 </template>

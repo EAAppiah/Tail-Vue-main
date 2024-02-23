@@ -7,7 +7,7 @@ const printPage = () => {
 </script>
 
 <template>
-  <div data-dial-init class="z-50 absolute end-6 bottom-6 group">
+  <div data-dial-init class="z-50 fixed end-6 bottom-6 group">
     <div id="speed-dial-menu-bottom-right" class="flex flex-col items-center hidden mb-4 space-y-2">
       <!-- PRINT OPTION -->
       <button 
