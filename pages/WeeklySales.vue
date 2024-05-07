@@ -1,5 +1,9 @@
 <script setup>
 
+definePageMeta({
+  layout: 'other'
+})
+
 const users = ref([]);
 const shifts = ref([
   {

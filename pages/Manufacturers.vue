@@ -1,5 +1,9 @@
 <script setup>
 
+definePageMeta({
+    layout: 'other'
+})
+
 const manufacturers = ref([]);
 // const searchFilter = ref('');
 
