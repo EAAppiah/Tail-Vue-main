@@ -10,11 +10,6 @@
 
 				<ul class="nav-list">
 					<li>
-						<i class="bx bx-search" @click="isSidebarOpen = !isSidebarOpen"></i>
-						<input type="text" placeholder="   Search...">
-						<span class="tooltip">Search</span>
-					</li>
-					<li>
 						<NuxtLink to="/dashboard">
 							<i class='bx bxs-dashboard'></i>
 							<span class="link_name">Dashboard</span>
@@ -36,13 +31,6 @@
 						<span class="tooltip">CS History</span>
 					</li>
 					<li>
-						<a href="#">
-							<i class='bx bx-server'></i>
-							<span class="link_name">Server</span>
-						</a>
-						<span class="tooltip">Server</span>
-					</li>
-					<li>
 						<NuxtLink to="/stafftracker">
 							<i class='bx bx-terminal'></i>
 							<span class="link_name">Staff Logs</span>
@@ -50,25 +38,26 @@
 						<span class="tooltip">Staff Logs</span>
 					</li>
 					<li>
-						<NuxtLink to="/versionmonitor">
-							<i class='bx bx-git-compare'></i>
-							<span class="link_name">Version Monitor</span>
-						</NuxtLink>
-						<span class="tooltip">Version Monitor</span>
-					</li>
-					<li>
-						<NuxtLink to="/producttable">
-							<i class='bx bx-cart'></i>
-							<span class="link_name">Products</span>
-						</NuxtLink>
-						<span class="tooltip">Products</span>
-					</li>
-					<li>
 						<NuxtLink to="/manufacturers">
 							<i class='bx bxs-data'></i>
 							<span class="link_name">Manufacturers</span>
 						</NuxtLink>
 						<span class="tooltip">Manufacturers</span>
+					</li>
+					<li>
+						<NuxtLink to="/taxes">
+							<i class='bx bx-credit-card'></i>
+							<span class="link_name">Taxes</span>
+						</NuxtLink>
+						<span class="tooltip">Taxes</span>
+					</li>
+
+					<li>
+						<NuxtLink to="/users">
+							<i class='bx bx-user-check'></i>
+							<span class="link_name">Users</span>
+						</NuxtLink>
+						<span class="tooltip">Users</span>
 					</li>
 					<li>
 						<NuxtLink to="/settings">
@@ -182,18 +171,18 @@ export default {
 	height: 60px;
 	line-height: 60px;
 	min-width: 42px;
-	font-size: 25px;
+	font-size: 40px;
 	text-align: center;
 }
 
 .sidebar .nav-list {
-	margin-top: 20px;
+	margin-top: 30px;
 	height: 100%;
 }
 
 .sidebar li {
 	position: relative;
-	margin: 8px auto;
+	margin: 15px auto;
 	list-style: none;
 }
 

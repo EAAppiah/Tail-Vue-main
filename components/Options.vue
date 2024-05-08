@@ -1,103 +1,134 @@
 <script setup>
-// Printing Page Method
+import { ref } from 'vue';
+
+// State to control the visibility of the speed dial menu
+const isMenuOpen = ref(false);
+
+// Toggle function for the speed dial menu
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+// Function to print the current page
 const printPage = () => {
   window.print();
-}
+};
 
+// Placeholder function for PDF export
+const exportToPDF = () => {
+  console.log("Exporting to PDF");
+};
 </script>
 
 <template>
-  <div data-dial-init class="z-50 fixed end-6 bottom-6 group">
-    <div id="speed-dial-menu-bottom-right" class="flex flex-col items-center hidden mb-4 space-y-2">
-      <!-- PRINT OPTION -->
-      <button 
-        type="button" 
-        data-tooltip-target="tooltip-print" 
-        data-tooltip-placement="left"
-        class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-        @click="printPage">
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 20">
-            <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z" />
-            <path
-              d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z" />
-          </svg>
-          <span class="sr-only">Print</span>
-      </button>
+  <div class="z-50 fixed bottom-6 right-6">
 
-      <!-- PRINT TOOLTIP -->
-      <div 
-        id="tooltip-print" 
-        role="tooltip"
-        class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
+    <!-- Speed Dial Menu -->
+    <div v-if="isMenuOpen" class="flex flex-col items-center mt-4 space-y-2">
+      <!-- Print Button -->
+      <button
+        @click="printPage"
+        class="flex justify-center items-center w-12 h-12 text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none"
+      >
+        <svg
+          class="w-5 h-5"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          aria-hidden="true"
         >
-          Print
-        <div class="tooltip-arrow" data-popper-arrow></div>
-      </div>
+          <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z" />
+          <path
+            d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z"
+          />
+        </svg>
+        <span class="sr-only">Print</span>
+      </button>
 
       <!-- DOWNLOAD PDF OPTION -->
-      <button 
-        type="button" 
-        data-tooltip-target="tooltip-download" 
-        data-tooltip-placement="left" 
+      <button
+        type="button"
         class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 shadow-sm dark:hover:text-white dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
-        @click="exportToPDF(pdfSection)">
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
-                <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
-            </svg>
-            <span class="sr-only">Download</span>
+        @click="exportToPDF(pdfSection)"
+      >
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
+          />
+          <path
+            d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+          />
+        </svg>
+        <span class="sr-only">Download</span>
       </button>
-        
-
-      <!-- DOWNLOAD TOOLTIP -->
-      <div 
-        id="tooltip-download" 
-        role="tooltip" 
-        class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-        >
-            Download
-            <div class="tooltip-arrow" data-popper-arrow></div>
-      </div>
-
+      
       <!-- ASK VAL -->
-      <button 
-        type="button" 
-        data-tooltip-target="tooltip-copy" 
+      <button
+        type="button"
+        data-tooltip-target="tooltip-copy"
         data-tooltip-placement="left"
-        class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 dark:hover:text-white shadow-sm dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400">
-        <svg class="w-5 h-5" id="Layer_1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-	xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 504.32 504.32" xml:space="preserve">
-	<g transform="translate(1 1)">
-		<path style="fill:#7EE1E6;"
-			d="M455.533,123.587c0,0,17.067,28.16,17.067,93.867s-17.067,93.867-17.067,93.867H421.4
+        class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 dark:border-gray-600 dark:hover:text-white shadow-sm dark:text-gray-400 hover:bg-gray-50 dark:bg-gray-700 dark:hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none dark:focus:ring-gray-400"
+      >
+        <svg
+          class="w-5 h-5"
+          id="Layer_1"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 504.32 504.32"
+          xml:space="preserve"
+        >
+          <g transform="translate(1 1)">
+            <path
+              style="fill: #7ee1e6"
+              d="M455.533,123.587c0,0,17.067,28.16,17.067,93.867s-17.067,93.867-17.067,93.867H421.4
 		c0,0,8.533-34.987,8.533-93.867s-8.533-93.867-8.533-93.867H455.533z M293.4,123.587v51.2c0,9.387-7.68,17.067-17.067,17.067h-51.2
 		c-9.387,0-17.067-7.68-17.067-17.067v-51.2c0-9.387,7.68-17.067,17.067-17.067h51.2C285.72,106.52,293.4,114.2,293.4,123.587z
 		 M293.4,21.187V55.32c0,9.387-7.68,17.067-17.067,17.067h-51.2c-9.387,0-17.067-7.68-17.067-17.067V21.187
 		c0-9.387,7.68-17.067,17.067-17.067h51.2C285.72,4.12,293.4,11.8,293.4,21.187z M45.933,123.587h34.133
-		c0,0-8.533,34.987-8.533,93.867s8.533,93.867,8.533,93.867H45.933c0,0-17.067-28.16-17.067-93.867S45.933,123.587,45.933,123.587z" />
-		<path style="fill:#80D6FA;" d="M455.533,456.387L455.533,456.387c-1.707,4.267-8.533,27.307-8.533,42.667H54.467
+		c0,0-8.533,34.987-8.533,93.867s8.533,93.867,8.533,93.867H45.933c0,0-17.067-28.16-17.067-93.867S45.933,123.587,45.933,123.587z"
+            />
+            <path
+              style="fill: #80d6fa"
+              d="M455.533,456.387L455.533,456.387c-1.707,4.267-8.533,27.307-8.533,42.667H54.467
 		c0-16.213-7.68-39.253-8.533-42.667l0,0c0,0,76.8-25.6,128-25.6c0,0,8.533,34.133,76.8,34.133s76.8-34.133,76.8-34.133
-		C378.733,430.787,455.533,456.387,455.533,456.387" />
-		<path style="fill:#7EE1E6;" d="M498.2,499.053H447c0-15.36,6.827-38.4,8.533-41.813h0.853
+		C378.733,430.787,455.533,456.387,455.533,456.387"
+            />
+            <path
+              style="fill: #7ee1e6"
+              d="M498.2,499.053H447c0-15.36,6.827-38.4,8.533-41.813h0.853
 		C485.4,467.48,498.2,499.053,498.2,499.053z M45.933,456.387c0.853,3.413,8.533,26.453,8.533,42.667h-51.2
-		C3.267,499.053,16.067,470.04,45.933,456.387L45.933,456.387z" />
-		<path style="fill:#FFD0A1;" d="M421.4,311.32c-32.427,64-93.867,102.4-170.667,102.4s-138.24-38.4-170.667-102.4
+		C3.267,499.053,16.067,470.04,45.933,456.387L45.933,456.387z"
+            />
+            <path
+              style="fill: #ffd0a1"
+              d="M421.4,311.32c-32.427,64-93.867,102.4-170.667,102.4s-138.24-38.4-170.667-102.4
 		c17.067-8.533,24.747-36.693,24.747-36.693s14.507-51.2,73.387-51.2s73.387,29.013,73.387,29.013s14.507-29.013,73.387-29.013
-		c58.88,0,73.387,51.2,73.387,51.2S404.333,302.787,421.4,311.32" />
-		<path style="fill:#80D6FA;" d="M314.733,268.653c6.827,0,12.8,5.973,12.8,12.8s-5.973,12.8-12.8,12.8s-12.8-5.973-12.8-12.8
+		c58.88,0,73.387,51.2,73.387,51.2S404.333,302.787,421.4,311.32"
+            />
+            <path
+              style="fill: #80d6fa"
+              d="M314.733,268.653c6.827,0,12.8,5.973,12.8,12.8s-5.973,12.8-12.8,12.8s-12.8-5.973-12.8-12.8
 		S307.907,268.653,314.733,268.653z M186.733,268.653c6.827,0,12.8,5.973,12.8,12.8s-5.973,12.8-12.8,12.8
-		c-6.827,0-12.8-5.973-12.8-12.8S179.907,268.653,186.733,268.653z" />
-		<path style="fill:#ECF4F7;"
-			d="M208.067,336.92H293.4c0,0-8.533,34.133-42.667,34.133S208.067,336.92,208.067,336.92" />
-		<path style="fill:#80D6FA;" d="M293.4,174.787v-51.2c0-9.387-7.68-17.067-17.067-17.067h-51.2c-9.387,0-17.067,7.68-17.067,17.067
+		c-6.827,0-12.8-5.973-12.8-12.8S179.907,268.653,186.733,268.653z"
+            />
+            <path
+              style="fill: #ecf4f7"
+              d="M208.067,336.92H293.4c0,0-8.533,34.133-42.667,34.133S208.067,336.92,208.067,336.92"
+            />
+            <path
+              style="fill: #80d6fa"
+              d="M293.4,174.787v-51.2c0-9.387-7.68-17.067-17.067-17.067h-51.2c-9.387,0-17.067,7.68-17.067,17.067
 		v51.2c0,9.387,7.68,17.067,17.067,17.067h51.2C285.72,191.853,293.4,184.173,293.4,174.787 M104.813,274.627
 		c0,0-7.68,28.16-24.747,36.693c0,0-8.533-34.987-8.533-93.867s8.533-93.867,8.533-93.867c27.307-52.907,69.12-92.16,128-102.4
 		V55.32c0,9.387,7.68,17.067,17.067,17.067h51.2c9.387,0,17.067-7.68,17.067-17.067V21.187c58.88,10.24,100.693,49.493,128,102.4
 		c0,0,8.533,34.987,8.533,93.867S421.4,311.32,421.4,311.32c-17.067-8.533-24.747-36.693-24.747-36.693s-14.507-51.2-73.387-51.2
-		c-58.88,0-73.387,29.013-73.387,29.013s-14.507-29.013-73.387-29.013C119.32,223.427,104.813,274.627,104.813,274.627" />
-	</g>
-	<path style="fill:#51565F;" d="M499.2,504.32c-2.56,0-4.267-1.707-4.267-4.267c0-0.853,0-14.507-14.507-22.187
+		c-58.88,0-73.387,29.013-73.387,29.013s-14.507-29.013-73.387-29.013C119.32,223.427,104.813,274.627,104.813,274.627"
+            />
+          </g>
+          <path
+            style="fill: #51565f"
+            d="M499.2,504.32c-2.56,0-4.267-1.707-4.267-4.267c0-0.853,0-14.507-14.507-22.187
 	c-1.707-0.853-2.56-3.413-1.707-5.973c0.853-1.707,3.413-2.56,5.973-1.707c19.627,9.387,19.627,29.013,19.627,29.013
 	C503.467,502.613,501.76,504.32,499.2,504.32z M448,504.32c-2.56,0-4.267-1.707-4.267-4.267c0-13.653,5.12-31.573,7.68-40.107
 	c-16.213-5.12-76.8-23.04-119.467-23.893c-4.267,9.387-20.48,34.133-79.36,34.133s-75.947-24.747-79.36-34.133
@@ -136,42 +167,44 @@ const printPage = () => {
 	C109.227,279.04,107.52,279.893,105.813,279.893z M277.333,197.12h-51.2c-11.947,0-21.333-9.387-21.333-21.333v-51.2
 	c0-11.947,9.387-21.333,21.333-21.333h51.2c11.947,0,21.333,9.387,21.333,21.333v51.2C298.667,187.733,289.28,197.12,277.333,197.12
 	z M226.133,111.787c-6.827,0-12.8,5.973-12.8,12.8v51.2c0,6.827,5.973,12.8,12.8,12.8h51.2c6.827,0,12.8-5.973,12.8-12.8v-51.2
-	c0-6.827-5.973-12.8-12.8-12.8H226.133z" />
-</svg>
+	c0-6.827-5.973-12.8-12.8-12.8H226.133z"
+          />
+        </svg>
         <span class="sr-only">Ask Vale</span>
-    </button>
+      </button>
 
-    <!-- ASK VALE TOOLTIP -->
-    <div 
-      id="tooltip-copy" 
-      role="tooltip"
-      class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-      >
-        VALe
-      <div class="tooltip-arrow" data-popper-arrow></div>
+
     </div>
 
-  </div>
-
-  <!-- SPEED DIAL BUTTON -->
-  <button 
-    type="button" 
-    data-dial-toggle="speed-dial-menu-bottom-right" 
-    aria-controls="speed-dial-menu-bottom-right"
-    aria-expanded="false"
-    class="flex items-center justify-center text-white bg-purple-700 rounded-full w-14 h-14 hover:bg-purple-800 dark:bg-purple-600 dark:hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 focus:outline-none dark:focus:ring-purple-800">
-      <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+        <!-- Floating Action Button (FAB) -->
+        <button
+      @click="toggleMenu"
+      class="flex items-center justify-center text-white bg-purple-700 rounded-full w-14 h-14 hover:bg-purple-800 dark:bg-purple-600 dark:hover:bg-purple-700 focus:ring-4 focus:ring-purple-300 focus:outline-none"
+    >
+      <svg
+        class="w-5 h-5 transition-transform"
+        :class="isMenuOpen ? 'rotate-45' : ''"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 18 18"
+        aria-hidden="true"
+      >
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M9 1v16M1 9h16"
+        />
       </svg>
       <span class="sr-only">Open actions menu</span>
-  </button>
-</div>
+    </button>
+  </div>
 </template>
 
 <style scoped>
 @media print {
-  #speed-dial-menu-bottom-right {
+  .fixed {
     display: none;
   }
 }

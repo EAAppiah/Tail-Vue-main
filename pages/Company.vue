@@ -1,10 +1,7 @@
-
 <script setup>
 const companies = ref([]);
-// const searchFilter = ref("");
-// const selectedCompany = ref(null);
 
-// Fetch data from API
+// Fetching data from API
 const fetchCompanies = async () => {
   try {
     const response = await fetch("http://localhost:8080/xtralis/api/read.php");
@@ -18,8 +15,33 @@ const fetchCompanies = async () => {
 const showModal = ref(false);
 
 const addCompany = () => {
-	showModal.value = true;
-}
+  showModal.value = true;
+};
+
+const editSelectedCompany = ref(null);
+
+
+
+const editCompany = (company) => {
+  editSelectedCompany.value = { ...company };
+};
+
+const deleteCompany = async (company, index) => {
+  try {
+    const response = await fetch(`http://localhost:8080/xtralis/api/delete.php?id=${company.id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      companies.value.splice(index, 1);
+      console.log('Company deleted successfully');
+    } else {
+      console.error('Error deleting company:', response.status);
+    }
+  } catch (error) {
+    console.error('Error deleting company:', error);
+  }
+};
 
 // Call fetchCompanies when the component is mounted
 onMounted(fetchCompanies);
@@ -36,24 +58,21 @@ definePageMeta({
       <div class="flex items-center justify-between">
         <!-- Search bar -->
         <SearchForm />
-        <DateRange />
-				<!-- Add Company Button -->
-				<div class="flex justify-end p-3">
-        <button
-					@click="addCompany"
-          class="mb-4 px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300"
-        >
-          Add Company
-        </button>
-      </div>
-
-
+        <!-- Add Company Button -->
+        <div class="flex justify-end p-3">
+          <button
+            @click="addCompany"
+            class="mb-4 px-6 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300"
+          >
+            Add Company
+          </button>
+        </div>
       </div>
 
       <!-- Company MODE -->
       <div class="tableFixHead">
         <table class="w-full text-sm text-center text-gray-500">
-          <thead class="text-xs text-indigo-700 uppercase bg-gray-100">
+          <thead class="text-xs text-indigo-700 uppercase bg-gray-50">
             <tr>
               <th class="px-4 py-3">Name</th>
               <th class="px-4 py-3">Telephone</th>
@@ -66,7 +85,7 @@ definePageMeta({
 
           <tbody>
             <tr
-              v-for="company in companies"
+              v-for="(company, index) in companies"
               :key="company.id"
               class="border-b hover:bg-gray-100 cursor-pointer"
             >
@@ -75,14 +94,21 @@ definePageMeta({
               <td class="px-4 py-3 font-medium">{{ company.address }}</td>
               <td class="px-4 py-3 font-medium">{{ company.email }}</td>
               <td class="px-4 py-3 font-medium">
-								<Icon name="twemoji:writing-hand-light-skin-tone" @click="editManufacturer(company, index)"
-									title="Edit">
-								</Icon>
-								<Icon name="bi:trash3" class="ms-2 text-purple-400" @click="deleteManufacturer(company)"
-									title="Delete">
-								</Icon>
-							</td>
-							<td>
+                <Icon
+                  name="twemoji:writing-hand-light-skin-tone"
+                  @click="editCompany(company, index)"
+                  title="Edit"
+                >
+                </Icon>
+                <Icon
+                  name="bi:trash3"
+                  class="ms-2 text-purple-400"
+                  @click="deleteCompany(company, index)"
+                  title="Delete"
+                >
+                </Icon>
+              </td>
+              <td>
                 <button
                   class="px-2 py-1 bg-green-600 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:ring-purple-300"
                 >
@@ -96,10 +122,24 @@ definePageMeta({
     </div>
   </div>
 
-	<!-- AddCompanyForm Modal -->
-  <AddCompanyForm v-if="showModal" @close="showModal = false" />
-</template>
+  <!-- AddCompanyForm Modal -->
+  <div v-if="showModal" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75">
+    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+      <h2 class="text-2xl font-semibold mb-6 text-center">Add New Company</h2>
+    <AddCompanyForm @close="showModal = false" />
+  </div>
+  </div>
 
+    <!-- Edit CompanyForm Modal -->
+    <div v-if="editSelectedCompany" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75">
+    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+      <h5 class="text-2xl font-semibold mb-6 text-center">{{ editSelectedCompany.name }} </h5>
+    <AddCompanyForm :company=editSelectedCompany @close="editSelectedCompany = null" />
+  </div>
+  </div>
+
+
+</template>
 
 <style scoped>
 .parent {
@@ -110,8 +150,6 @@ definePageMeta({
   grid-row-gap: 0px;
   margin: 1rem;
 }
-
-
 
 .card {
   background-color: #fff;
@@ -126,7 +164,6 @@ definePageMeta({
 }
 
 .tableFixHead thead th {
-  position: sticky;
   top: 0px;
   z-index: 1;
   background: #e5e7eb;

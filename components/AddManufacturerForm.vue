@@ -1,72 +1,172 @@
 <template>
-  <div>
-    <form class="w-full max-w-lg">
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-            First Name
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name" type="text" placeholder="Jane">
-          <p class="text-red-500 text-xs italic">Please fill out this field.</p>
-        </div>
-        <div class="w-full md:w-1/2 px-3">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
-            Last Name
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-last-name" type="text" placeholder="Doe">
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-6">
-        <div class="w-full px-3">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-            Password
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-password" type="password" placeholder="******************">
-          <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
-        </div>
-      </div>
-      <div class="flex flex-wrap -mx-3 mb-2">
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-            City
-          </label>
-          <input
-            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-city" type="text" placeholder="Albuquerque">
-        </div>
-        <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-state">
-            State
-          </label>
-          <div class="relative">
-            <select
-              class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-state">
-              <option>New Mexico</option>
-              <option>Missouri</option>
-              <option>Texas</option>
-            </select>
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </div>
-        </div>
-      </div>
-      <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-zip">
-          Zip
-        </label>
-        <input
-          class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          id="grid-zip" type="text" placeholder="90210">
-      </div>
+  <div class="relative">
+    <button
+      class="absolute top-[-5.5rem] right-[-2rem] px-[0.8rem] py-[0.5rem] bg-red-500 text-white rounded-md text-md"
+      @click="$emit('close')"
+    >
+      x
+    </button>
+  </div>
+  <form @submit.prevent="submitForm" class="space-y-4">
+    <div>
+      <label for="manufactureName" class="block text-gray-700 font-semibold mb-2"
+        >Manufacturer</label
+      >
+      <input
+        id="manufactureName"
+        v-model="formData.fullName"
+        type="text"
+        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter manufacturer name"
+        required
+      />
     </div>
+
+    <div>
+      <label for="interest" class="block text-gray-700 font-semibold mb-2"
+        >Interest</label
+      >
+      <input
+        id="interest"
+        v-model="formData.isUser"
+        type="text"
+        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter interest"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-gray-700 font-semibold mb-2"
+        >Email</label
+      >
+      <input
+        id="email"
+        v-model="formData.rating"
+        type="email"
+        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter email address"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="telephone" class="block text-gray-700 font-semibold mb-2"
+        >Phone</label
+      >
+      <input
+        id="telephone"
+        v-model="formData.col1"
+        type="tel"
+        class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Enter telephone number"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="image" class="block text-gray-700 font-semibold mb-2">Image</label>
+      <input
+        id="image"
+        type="file"
+        @change="onFileChange"
+        accept="image/*"
+        class="border border-gray-300 rounded-md p-2"
+      />
+    </div>
+
+    <div class="flex items-center mt-2">
+      <input
+        type="submit"
+        class="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        :value="manufacturer ? 'Update' : 'Submit'" />
+    </div>
+    
   </form>
-</div></template>
+  <div
+    v-if="payload.message"
+    class="mt-4 p-4 rounded-md"
+    :class="
+      payload.isSuccess
+        ? 'bg-green-100 text-green-700'
+        : 'bg-red-100 text-red-700'
+    "
+  >
+    {{ payload.message }}
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    manufacturer: null,
+  },
+
+  emits: ['close'],
+  data() {
+    return {
+      formData: {
+        fullName: "",
+        isUser: "",
+        rating: "",
+        col1: "",
+        col2: null,
+      },
+      payload: {
+        message: "",
+        isSuccess: false,
+      },
+    };
+  },
+  mounted() {
+    if (this.manufacturer) {
+      this.formData = { ...this.manufacturer };
+    }
+  },
+  methods: {
+    // closeModal() {
+    //   this.$emit('close');
+    // },
+    async submitForm() {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/xtralis/api/create.php",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(this.formData),
+          }
+        );
+
+        const data = await response.json();
+
+        if (response.ok) {
+          this.payload.message = data.message;
+          this.payload.isSuccess = true;
+          this.clearForm();
+        } else {
+          this.payload.message = data.message || "An error occurred";
+          this.payload.isSuccess = false;
+        }
+      } catch (error) {
+        this.payload.message = error.message || "An error occurred";
+        this.payload.isSuccess = false;
+      }
+    },
+
+    onFileChange(event) {
+      // Update formData.image when file input changes
+      this.formData.col2 = event.target.files[0];
+    },
+    clearForm() {
+      this.formData.fullName = "";
+      this.formData.isUser = "";
+      this.formData.rating = "";
+      this.formData.col1 = "";
+      this.formData.col2 = null;
+    },
+  },
+};
+</script>
