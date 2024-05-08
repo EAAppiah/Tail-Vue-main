@@ -1,6 +1,6 @@
 <template>
-	<div class="mx-auto">
-		<div class="border-b border-gray-200 dark:border-gray-700">
+  <div class="parent">
+    <div class="div1 card bg-white relative border rounded-lg">
 			<ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
 				<li class="me-2">
 					<a href="#"
@@ -60,3 +60,45 @@ definePageMeta({
 })
 </script>
 
+<style scoped>
+.parent {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  margin: 1rem;
+}
+
+.div1 {
+  height: 88vh;
+}
+
+.card {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 10px;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.tableFixHead {
+  max-height: 60vh; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.tableFixHead table {
+  border-spacing: 0;
+}
+
+.tableFixHead thead th {
+  top: 0;
+  z-index: 1;
+  background-color: #e5e7eb;
+}
+
+[title] {
+  position: relative;
+  cursor: pointer;
+}
+</style>
