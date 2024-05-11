@@ -4,9 +4,9 @@ const companies = ref([]);
 // Fetching data from API
 const fetchCompanies = async () => {
   try {
-    const response = await fetch("http://localhost:8080/xtralis/api/read.php");
-    const data = await response.json();
-    companies.value = data.companies;
+    const response = await fetch("https://api-generator.retool.com/LnKhVI/companies");
+    companies.value = await response.json();
+    console.log(companies.value);
   } catch (error) {
     console.error("Error fetching companies:", error);
   }
@@ -20,21 +20,18 @@ const addCompany = () => {
 
 const editSelectedCompany = ref(null);
 
-
-
 const editCompany = (company) => {
   editSelectedCompany.value = { ...company };
 };
 
 const deleteCompany = async (company, index) => {
   try {
-    const response = await fetch(`http://localhost:8080/xtralis/api/delete.php?id=${company.id}`, {
+    const response = await fetch("https://api-generator.retool.com/LnKhVI/companies/1", {
       method: 'DELETE',
     });
 
     if (response.ok) {
       companies.value.splice(index, 1);
-      console.log('Company deleted successfully');
     } else {
       console.error('Error deleting company:', response.status);
     }
@@ -90,7 +87,7 @@ definePageMeta({
               class="border-b hover:bg-gray-100 cursor-pointer"
             >
               <td class="px-4 py-3 font-medium">{{ company.name }}</td>
-              <td class="px-4 py-3 font-medium">{{ company.telephone }}</td>
+              <td class="px-4 py-3 font-medium">{{ company.phone }}</td>
               <td class="px-4 py-3 font-medium">{{ company.address }}</td>
               <td class="px-4 py-3 font-medium">{{ company.email }}</td>
               <td class="px-4 py-3 font-medium">

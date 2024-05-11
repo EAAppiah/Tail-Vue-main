@@ -28,7 +28,7 @@
       >
       <input
         id="telephone"
-        v-model="formData.telephone"
+        v-model="formData.phone"
         type="tel"
         class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         placeholder="Enter telephone number"
@@ -68,9 +68,9 @@
       <input
         type="submit"
         class="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        :value="company ? 'Update' : 'Submit'" />
+        :value="company ? 'Update' : 'Submit'"
+      />
     </div>
-    
   </form>
   <div
     v-if="payload.message"
@@ -88,17 +88,20 @@
 <script>
 export default {
   props: {
-    company: null,
+    company: {
+      type: Object,
+      default: null,
+    },
   },
 
-  emits: ['close'],
-  
+  emits: ["close"],
+
   data() {
     return {
       formData: {
         name: "",
         address: "",
-        telephone: "",
+        phone: "",
         email: "",
       },
       payload: {
@@ -115,16 +118,30 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const response = await fetch(
-          "http://localhost:8080/xtralis/api/create.php",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(this.formData),
-          }
-        );
+        let response;
+        if (this.company) {
+          response = await fetch(
+            "https://api-generator.retool.com/LnKhVI/companies/1",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(this.formData),
+            }
+          );
+        } else {
+          response = await fetch(
+            "https://api-generator.retool.com/LnKhVI/companies",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(this.formData),
+            }
+          );
+        }
 
         const data = await response.json();
 
@@ -144,7 +161,7 @@ export default {
     clearForm() {
       this.formData.name = "";
       this.formData.address = "";
-      this.formData.telephone = "";
+      this.formData.phone = "";
       this.formData.email = "";
     },
   },
