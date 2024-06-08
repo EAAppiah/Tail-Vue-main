@@ -32,7 +32,7 @@ const email = ref('');
 const password = ref('');
 
 const login = () => {
-  if (email.value === 'test@test.com' && password === '123') {
+  if (email.value === 'test@test.com' && password.value === '123') {
     window.location.href = '/dashboard';
   } else {
     alert('Email: test@test.com or Password:123');
