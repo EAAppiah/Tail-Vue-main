@@ -83,7 +83,7 @@
 		</div>
 	</div>
 </template>
-  
+
 <script>
 import 'boxicons/css/boxicons.min.css';
 
@@ -97,7 +97,7 @@ export default {
 	},
 };
 </script>
-  
+
 <style scoped>
 @media print {
 	.sidebar {
@@ -109,7 +109,7 @@ export default {
 	min-height: 100vh;
 	width: 70px;
 	padding: 6px 14px;
-	z-index: 99;
+	z-index: 40;
 	background-color: hsl(210, 14%, 97%);
 	transition: all .5s ease;
 	position: fixed;

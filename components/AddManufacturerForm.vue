@@ -2,96 +2,56 @@
   <div class="relative">
     <button
       class="absolute top-[-5.5rem] right-[-2rem] px-[0.8rem] py-[0.5rem] bg-red-500 text-white rounded-md text-md"
-      @click="$emit('close')"
-    >
+      @click="$emit('close')">
       x
     </button>
   </div>
   <form @submit.prevent="submitForm" class="space-y-4">
     <div>
-      <label for="manufactureName" class="block text-gray-700 font-semibold mb-2"
-        >Manufacturer</label
-      >
-      <input
-        id="manufactureName"
-        v-model="formData.fullName"
-        type="text"
+      <label for="manufactureName" class="block text-gray-700 font-semibold mb-2">Manufacturer</label>
+      <input id="manufactureName" v-model="formData.fullName" type="text"
         class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Enter manufacturer name"
-        required
-      />
+        placeholder="Enter manufacturer name" required />
     </div>
 
     <div>
-      <label for="interest" class="block text-gray-700 font-semibold mb-2"
-        >Interest</label
-      >
-      <input
-        id="interest"
-        v-model="formData.isUser"
-        type="text"
+      <label for="interest" class="block text-gray-700 font-semibold mb-2">Interest</label>
+      <input id="interest" v-model="formData.isUser" type="text"
         class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Enter interest"
-        required
-      />
+        placeholder="Enter interest" required />
     </div>
 
     <div>
-      <label for="email" class="block text-gray-700 font-semibold mb-2"
-        >Email</label
-      >
-      <input
-        id="email"
-        v-model="formData.rating"
-        type="email"
+      <label for="email" class="block text-gray-700 font-semibold mb-2">Email</label>
+      <input id="email" v-model="formData.rating" type="email"
         class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Enter email address"
-        required
-      />
+        placeholder="Enter email address" required />
     </div>
 
     <div>
-      <label for="telephone" class="block text-gray-700 font-semibold mb-2"
-        >Phone</label
-      >
-      <input
-        id="telephone"
-        v-model="formData.col1"
-        type="tel"
+      <label for="telephone" class="block text-gray-700 font-semibold mb-2">Phone</label>
+      <input id="telephone" v-model="formData.col1" type="tel"
         class="w-full px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        placeholder="Enter telephone number"
-        required
-      />
+        placeholder="Enter telephone number" required />
     </div>
 
     <div>
       <label for="image" class="block text-gray-700 font-semibold mb-2">Image</label>
-      <input
-        id="image"
-        type="file"
-        @change="onFileChange"
-        accept="image/*"
-        class="border border-gray-300 rounded-md p-2"
-      />
+      <input id="image" type="file" @change="onFileChange" accept="image/*"
+        class="border border-gray-300 rounded-md p-2" />
     </div>
 
     <div class="flex items-center mt-2">
-      <input
-        type="submit"
+      <input type="submit"
         class="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         :value="manufacturer ? 'Update' : 'Submit'" />
     </div>
-    
+
   </form>
-  <div
-    v-if="payload.message"
-    class="mt-4 p-4 rounded-md"
-    :class="
-      payload.isSuccess
-        ? 'bg-green-100 text-green-700'
-        : 'bg-red-100 text-red-700'
-    "
-  >
+  <div v-if="payload.message" class="mt-4 p-4 rounded-md" :class="payload.isSuccess
+    ? 'bg-green-100 text-green-700'
+    : 'bg-red-100 text-red-700'
+    ">
     {{ payload.message }}
   </div>
 </template>
@@ -129,23 +89,35 @@ export default {
     // },
     async submitForm() {
       try {
-        const response = await fetch(
-          "http://localhost:8080/xtralis/api/create.php",
-          {
-            method: "POST",
+        let response;
+        if (this.manufacturer) {
+          response = await fetch(
+            `https://retoolapi.dev/iU7LpP/manufacturer0098/${this.manufacturer.id}`, {
+            method: "PUT",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(this.formData),
-          }
-        );
-
+          });
+        } else {
+          response = await fetch(
+            "https://retoolapi.dev/iU7LpP/manufacturer0098",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(this.formData),
+            }
+          );
+        }
         const data = await response.json();
-
+        console.log(data.value);
         if (response.ok) {
-          this.payload.message = data.message;
+          this.payload.message = 'Done'
           this.payload.isSuccess = true;
           this.clearForm();
+          alert("Data added successfully");
         } else {
           this.payload.message = data.message || "An error occurred";
           this.payload.isSuccess = false;

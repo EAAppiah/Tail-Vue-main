@@ -1,8 +1,7 @@
 <template>
   <div class="parent">
     <div
-      class="div1 card bg-white relative border rounded-lg border-gray-300 md:rounded-lg shadow-xl align-middle inline-block min-w-full"
-    >
+      class="div1 card bg-white relative border rounded-lg border-gray-300 md:rounded-lg shadow-xl align-middle inline-block min-w-full">
       <!-- SEARCH FORM -->
       <SearchForm />
 
@@ -11,10 +10,7 @@
         <h4 class="text-left text-md font-bold text-purple-900 mb-2">
           Personal Information:
         </h4>
-        <div
-          style="display: flex; justify-content: space-between; font-size: 12px"
-          class="personal-info"
-        >
+        <div style="display: flex; justify-content: space-between; font-size: 12px" class="personal-info">
           <div>
             <strong>Name:</strong> <span>{{ customer.name }}</span>
           </div>
@@ -29,10 +25,7 @@
         <h3 class="text-left text-medium text-purple-900 font-bold mt-3 mb-2">
           Medical Information:
         </h3>
-        <div
-          style="display: flex; justify-content: space-between; font-size: 12px"
-          class="personal-info"
-        >
+        <div style="display: flex; justify-content: space-between; font-size: 12px" class="personal-info">
           <div class="mb-4">
             <strong>Insurance Provider:</strong>
             <span>{{ customer.insuranceProvider }}</span>
@@ -48,12 +41,9 @@
 
         <!--CUSTOMER REFILL TABLE-->
         <div class="flex flex-col">
-          <div
-            class="-my-2 py-2 overflow-x-auto md:-mx-4 md:px-4 lg:-mx-8 lg:px-8"
-          >
+          <div class="-my-2 py-2 overflow-x-auto md:-mx-4 md:px-4 lg:-mx-8 lg:px-8">
             <div
-              class="align-middle inline-block min-w-full shadow overflow-hidden md:rounded-lg border border-gray-300"
-            >
+              class="align-middle inline-block min-w-full shadow overflow-hidden md:rounded-lg border border-gray-300">
               <h1 class="text-center text-xl font-medium text-purple-700 my-2">
                 CUSTOMER REFILLS
               </h1>
@@ -79,37 +69,27 @@
                 <tbody class="bg-white">
                   <!-- Table rows -->
                   <tr v-for="(refill, index) in refills" :key="index">
-                    <td
-                      class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                    >
+                    <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                       <div class="text-center font-medium text-gray-900">
                         {{ refill.date }}
                       </div>
                     </td>
-                    <td
-                      class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                    >
+                    <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                       <div class="text-center font-medium text-gray-900">
                         {{ refill.product }}
                       </div>
                     </td>
-                    <td
-                      class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                    >
+                    <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                       <div class="text-center font-medium text-gray-900">
                         {{ refill.unit }}
                       </div>
                     </td>
-                    <td
-                      class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                    >
+                    <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                       <div class="text-center font-medium text-gray-900">
                         {{ refill.qtyBought }}
                       </div>
                     </td>
-                    <td
-                      class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                    >
+                    <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                       <div class="text-center font-medium text-gray-900">
                         {{ refill.refillDate }}
                       </div>
@@ -126,16 +106,13 @@
     <!-- PURCHASE HISTORY TABLE -->
     <div class="div2 card bg-white relative border rounded-lg">
       <div class="flex flex-col">
-        <div
-          class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8"
-        >
+        <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <h1 class="text-center text-xl font-medium text-purple-700 mt-2 mb-4">
             PURCHASE HISTORY
           </h1>
 
           <div
-            class="border border-gray-300 shadow flex flex-col md:flex-row justify-around p-2 my-4 mx-4 overflow-hidden sm:rounded-lg"
-          >
+            class="border border-gray-300 shadow flex flex-col md:flex-row justify-around p-2 my-4 mx-4 overflow-hidden sm:rounded-lg">
             <span class="text-center">
               Total
               <span class="font-bold"> Cost </span>
@@ -183,47 +160,34 @@
             <tbody class="bg-white">
               <!-- Table rows -->
               <tr v-for="(purchase, index) in purchases" :key="index">
-                <td
-                  class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                >
+                <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                   <div class="text-center font-medium text-gray-900">
                     {{ purchase.date }}
                   </div>
                 </td>
-                <td
-                  class="px-4 py-2 flex justify-center items-center whitespace-no-wrap border-b border-gray-200"
-                >
+                <td class="px-4 py-2 flex justify-center items-center whitespace-no-wrap border-b border-gray-200">
                   <button
                     class="px-2 py-1 bg-purple-600 text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:ring-purple-300"
-                    @click="openReceiptPopup(purchase)"
-                  >
+                    @click="openReceiptPopup(purchase)">
                     View
                   </button>
                 </td>
-                <td
-                  class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                >
+                <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                   <div class="text-center font-medium text-gray-900">
                     {{ purchase.cost.toLocaleString() }}
                   </div>
                 </td>
-                <td
-                  class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                >
+                <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                   <div class="text-center font-medium text-gray-900">
                     {{ purchase.disc.toLocaleString() }}
                   </div>
                 </td>
-                <td
-                  class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                >
+                <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                   <div class="text-center font-medium text-gray-900">
                     {{ purchase.amtPaid.toLocaleString() }}
                   </div>
                 </td>
-                <td
-                  class="px-4 py-2 whitespace-no-wrap border-b border-gray-200"
-                >
+                <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                   <div class="text-center font-medium text-gray-900">
                     {{ purchase.bal.toLocaleString() }}
                   </div>
@@ -241,18 +205,12 @@
   </div>
 
   <!-- RECEIPT POPUP -->
-  <div
-    v-if="isReceiptPopupVisible"
-    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75"
-  >
-    <div
-      class="bg-white rounded-lg p-8 shadow-md max-w-3xl mx-auto max-h-120 overflow-y-auto"
-    >
+  <div v-if="isReceiptPopupVisible"
+    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+    <div class="bg-white rounded-lg p-8 shadow-md max-w-3xl mx-auto max-h-120 overflow-y-auto">
       <div class="relative">
-        <button
-          class="absolute top-[-1.9rem] right-[-1.9rem] px-2 py-1 bg-red-500 text-white rounded-md"
-          @click="closeReceiptPopup"
-        >
+        <button class="absolute top-[-1.9rem] right-[-1.9rem] px-2 py-1 bg-red-500 text-white rounded-md"
+          @click="closeReceiptPopup">
           &times;
         </button>
         <h2 class="text-lg font-normal">Receipt</h2>
@@ -274,12 +232,9 @@
           </thead>
           <tbody>
             <!-- Loop through user's status details -->
-            <tr
-              v-for="(
+            <tr v-for="(
                 receiptDetail, index
-              ) in selectedPurchaseForReceipt.receiptDetails"
-              :key="index"
-            >
+              ) in selectedPurchaseForReceipt.receiptDetails" :key="index">
               <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                 <div class="text-center">
                   {{ receiptDetail.product }}
@@ -318,8 +273,7 @@
               <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
                 <button
                   class="px-2 py-1 flex justify-center bg-gray-400 font-bold rounded-md hover:bg-gray-200 focus:outline-none focus:ring focus:ring-gray-300"
-                  @click="openDigitalModal()"
-                >
+                  @click="openDigitalModal()">
                   Return
                 </button>
               </td>
@@ -328,9 +282,7 @@
             <!-- Calculate and display receipt totals -->
             <tr>
               <td colspan="3" class="text-md font-bold">Totals:</td>
-              <td
-                class="font-bold text-sm text-green-500 text-center total-cell"
-              >
+              <td class="font-bold text-sm text-green-500 text-center total-cell">
                 {{
                   calculateTotal(
                     "cost",
@@ -338,9 +290,7 @@
                   ).toLocaleString()
                 }}
               </td>
-              <td
-                class="font-bold text-sm text-blue-500 text-center total-cell"
-              >
+              <td class="font-bold text-sm text-blue-500 text-center total-cell">
                 {{
                   calculateTotal(
                     "disc",
@@ -348,9 +298,7 @@
                   ).toLocaleString()
                 }}
               </td>
-              <td
-                class="font-bold text-sm text-purple-500 text-center total-cell"
-              >
+              <td class="font-bold text-sm text-purple-500 text-center total-cell">
                 {{
                   calculateTotal(
                     "amtPaid",
@@ -372,14 +320,12 @@
         <div class="receipt__btn">
           <button
             class="px-2 py-1 flex justify-center bg-yellow-400 font-bold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-yellow-300"
-            @click="openMomoPopup"
-          >
+            @click="openMomoPopup">
             Momo
           </button>
           <button
             class="px-2 py-1 flex justify-center bg-green-500 font-bold text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300"
-            @click="openCashPopup"
-          >
+            @click="openCashPopup">
             Cash
           </button>
         </div>
@@ -388,18 +334,11 @@
   </div>
 
   <!-- MOMO POPUP -->
-  <div
-    v-if="isMomoPopupVisible"
-    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75"
-  >
-    <div
-      class="bg-white rounded-lg p-6 shadow-md w-5/6 max-w-3xl h-auto overflow-y-auto"
-    >
+  <div v-if="isMomoPopupVisible" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+    <div class="bg-white rounded-lg p-6 shadow-md w-5/6 max-w-3xl h-auto overflow-y-auto">
       <div class="relative">
-        <button
-          class="absolute top-[-1.4rem] right-[-1.4rem] px-2 py-1 bg-red-500 text-white rounded-md"
-          @click="closeMomoPopup"
-        >
+        <button class="absolute top-[-1.4rem] right-[-1.4rem] px-2 py-1 bg-red-500 text-white rounded-md"
+          @click="closeMomoPopup">
           &times;
         </button>
         <h2 class="text-xl">Mobile Money Payment</h2>
@@ -416,33 +355,27 @@
         <div class="mx-auto">
           <div class="my-4 text-center flex justify-between text-lg">
             <strong>Credited Amount:</strong>
-            <span class="font-bold text-lg"
-              >GHS
+            <span class="font-bold text-lg">GHS
               {{
                 calculateTotal(
                   "cost",
                   selectedPurchaseForReceipt.receiptDetails
                 ).toLocaleString()
-              }}</span
-            >
+              }}</span>
           </div>
           <div class="my-4 text-center mb-2 flex justify-between text-lg">
             <strong>Total Amount Paid:</strong>
-            <span class="font-bold text-lg"
-              >GHS
+            <span class="font-bold text-lg">GHS
               {{
                 calculateTotal(
                   "amtPaid",
                   selectedPurchaseForReceipt.receiptDetails
                 ).toLocaleString()
-              }}</span
-            >
+              }}</span>
           </div>
           <div class="my-4 text-center mb-2 flex justify-between text-lg">
             <strong>Balance:</strong>
-            <span class="font-bold text-lg"
-              >GHS {{ balance.toLocaleString() }}</span
-            >
+            <span class="font-bold text-lg">GHS {{ balance.toLocaleString() }}</span>
           </div>
         </div>
       </div>
@@ -450,14 +383,9 @@
       <!-- Dropdown Select -->
       <div class="my-4 flex justify-between">
         <div>
-          <label for="receiptAccount" class="block font-bold text-lg"
-            >Select Receipt Account:</label
-          >
-          <select
-            id="receiptAccount"
-            name="receiptAccount"
-            class="mt-2 block w-48 p-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300 focus:outline-none"
-          >
+          <label for="receiptAccount" class="block font-bold text-lg">Select Receipt Account:</label>
+          <select id="receiptAccount" name="receiptAccount"
+            class="mt-2 block w-48 p-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300 focus:outline-none">
             <option value="Shop 1">Shop 1</option>
             <option value="Shop 2">Shop 2</option>
             <option value="Shop 3">Shop 3</option>
@@ -466,23 +394,16 @@
         <div>
           <!-- Amount Received Input -->
           <div class="my-4">
-            <label for="amountReceived" class="block font-bold text-lg"
-              >Amount Received:</label
-            >
-            <input
-              id="amountReceived"
-              name="amountReceived"
-              type="number"
+            <label for="amountReceived" class="block font-bold text-lg">Amount Received:</label>
+            <input id="amountReceived" name="amountReceived" type="number"
               class="mt-2 block p-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300 focus:outline-none w-48"
-              value="0"
-            />
+              value="0" />
           </div>
         </div>
       </div>
       <div class="flex items-center justify-center">
         <button
-          class="px-10 py-2 flex justify-center bg-purple-600 font-medium text-white rounded-md hover:bg-purple-500 focus:outline-none focus:ring focus:ring-purple-300"
-        >
+          class="px-10 py-2 flex justify-center bg-purple-600 font-medium text-white rounded-md hover:bg-purple-500 focus:outline-none focus:ring focus:ring-purple-300">
           Make Payment
         </button>
       </div>
@@ -490,18 +411,11 @@
   </div>
 
   <!-- CASH POPUP -->
-  <div
-    v-if="isCashPopupVisible"
-    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75"
-  >
-    <div
-      class="bg-white rounded-lg p-6 shadow-md w-5/6 max-w-3xl h-auto overflow-y-auto"
-    >
+  <div v-if="isCashPopupVisible" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+    <div class="bg-white rounded-lg p-6 shadow-md w-5/6 max-w-3xl h-auto overflow-y-auto">
       <div class="relative">
-        <button
-          class="absolute top-[-1.4rem] right-[-1.4rem] px-2 py-1 bg-red-500 text-white rounded-md"
-          @click="closeCashPopup"
-        >
+        <button class="absolute top-[-1.4rem] right-[-1.4rem] px-2 py-1 bg-red-500 text-white rounded-md"
+          @click="closeCashPopup">
           &times;
         </button>
         <h2 class="text-xl">Cash Payment</h2>
@@ -518,53 +432,40 @@
         <div class="mx-auto">
           <div class="my-4 text-center flex justify-between text-lg">
             <strong>Credited Amount:</strong>
-            <span class="font-bold text-lg"
-              >GHS
+            <span class="font-bold text-lg">GHS
               {{
                 calculateTotal(
                   "cost",
                   selectedPurchaseForReceipt.receiptDetails
                 ).toLocaleString()
-              }}</span
-            >
+              }}</span>
           </div>
           <div class="my-4 text-center mb-2 flex justify-between text-lg">
             <strong>Total Amount Paid:</strong>
-            <span class="font-bold text-lg"
-              >GHS
+            <span class="font-bold text-lg">GHS
               {{
                 calculateTotal(
                   "amtPaid",
                   selectedPurchaseForReceipt.receiptDetails
                 ).toLocaleString()
-              }}</span
-            >
+              }}</span>
           </div>
           <div class="my-4 text-center mb-2 flex justify-between text-lg">
             <strong>Balance:</strong>
-            <span class="font-bold text-lg"
-              >GHS {{ balance.toLocaleString() }}</span
-            >
+            <span class="font-bold text-lg">GHS {{ balance.toLocaleString() }}</span>
           </div>
         </div>
       </div>
       <!-- Amount Received Input -->
       <div class="my-4">
-        <label for="amountReceived" class="block font-bold text-lg"
-          >Cash Tendered:</label
-        >
-        <input
-          id="amountReceived"
-          name="amountReceived"
-          type="number"
+        <label for="amountReceived" class="block font-bold text-lg">Cash Tendered:</label>
+        <input id="amountReceived" name="amountReceived" type="number"
           class="mt-2 block p-2 border rounded-md shadow-sm focus:ring focus:ring-purple-300 focus:outline-none w-48"
-          value="0"
-        />
+          value="0" />
       </div>
       <div class="flex items-center justify-center">
         <button
-          class="px-10 py-2 flex justify-center bg-purple-700 font-medium text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:ring-purple-300"
-        >
+          class="px-10 py-2 flex justify-center bg-purple-700 font-medium text-white rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:ring-purple-300">
           Make Payment
         </button>
       </div>
@@ -752,10 +653,10 @@ export default {
         (dayOfMonth === 1
           ? "st"
           : dayOfMonth === 2
-          ? "nd"
-          : dayOfMonth === 3
-          ? "rd"
-          : "th");
+            ? "nd"
+            : dayOfMonth === 3
+              ? "rd"
+              : "th");
 
       return `${dayOfWeek}-${dayOfMonthFormatted}-${month}`;
     },
