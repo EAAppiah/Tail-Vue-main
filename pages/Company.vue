@@ -127,20 +127,25 @@ definePageMeta({
   </div>
 
   <!-- AddCompanyForm Modal -->
-  <div v-if="showModal" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50">
-    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
-      <h2 class="text-2xl font-semibold mb-6 text-center">Add New Company</h2>
-      <AddCompanyForm @close="showModal = false" />
+  <Transition name="modal-outer">
+    <div v-if="showModal" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50">
+      <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Add New Company</h2>
+        <AddCompanyForm @close="showModal = false" />
+      </div>
     </div>
-  </div>
+  </Transition>
 
   <!-- Edit CompanyForm Modal -->
-  <div v-if="editSelectedCompany" class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50">
-    <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
-      <h5 class="text-2xl font-semibold mb-6 text-center">{{ editSelectedCompany.name }} </h5>
-      <AddCompanyForm :company=editSelectedCompany @close="editSelectedCompany = null" />
+  <Transition name="modal-outer">
+    <div v-if="editSelectedCompany"
+      class="fixed inset-0 flex justify-center items-center bg-gray-800 bg-opacity-75 z-50">
+      <div class="bg-white rounded-lg shadow-md p-8 max-w-md w-full">
+        <h5 class="text-2xl font-semibold mb-6 text-center">{{ editSelectedCompany.name }} </h5>
+        <AddCompanyForm :company=editSelectedCompany @close="editSelectedCompany = null" />
+      </div>
     </div>
-  </div>
+  </Transition>
 
 
 </template>
@@ -171,5 +176,15 @@ definePageMeta({
   top: 0px;
   z-index: 1;
   background: #e5e7eb;
+}
+
+.modal-outer-enter-active,
+.modal-outer-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
+}
+
+.modal-outer-enter-from,
+.modal-outer-leave-to {
+  opacity: 0;
 }
 </style>

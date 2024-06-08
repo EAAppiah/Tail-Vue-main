@@ -205,133 +205,137 @@
   </div>
 
   <!-- RECEIPT POPUP -->
-  <div v-if="isReceiptPopupVisible"
-    class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-    <div class="bg-white rounded-lg p-8 shadow-md max-w-3xl mx-auto max-h-120 overflow-y-auto">
-      <div class="relative">
-        <button class="absolute top-[-1.9rem] right-[-1.9rem] px-2 py-1 bg-red-500 text-white rounded-md"
-          @click="closeReceiptPopup">
-          &times;
-        </button>
-        <h2 class="text-lg font-normal">Receipt</h2>
-        <table class="min-w-full mt-4">
-          <thead class="text-indigo-700 text-xs bg-gray-100">
-            <tr>
-              <th class="px-4 py-2 border-b">Product</th>
-              <th class="px-4 py-2 border-b">Qty</th>
-              <th class="px-4 py-2 border-b">Unit</th>
-              <th class="px-4 py-2 border-b">Cost</th>
-              <th class="px-4 py-2 border-b">Disc</th>
-              <th class="px-4 py-2 border-b">Amt Paid</th>
-              <th class="px-4 py-2 border-b">
-                Bal
-                <!--Balance-->
-              </th>
-              <th class="px-4 py-2 border-b">Returns</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Loop through user's status details -->
-            <tr v-for="(
+  <Transition name="modal-outer">
+    <div v-if="isReceiptPopupVisible"
+      class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+      <div class="bg-white rounded-lg p-8 shadow-md max-w-3xl mx-auto max-h-120 overflow-y-auto">
+        <Transition name="modal-inner">
+          <div class="relative">
+            <button class="absolute top-[-1.9rem] right-[-1.9rem] px-2 py-1 bg-red-500 text-white rounded-md"
+              @click="closeReceiptPopup">
+              &times;
+            </button>
+            <h2 class="text-lg font-normal">Receipt</h2>
+            <table class="min-w-full mt-4">
+              <thead class="text-indigo-700 text-xs bg-gray-100">
+                <tr>
+                  <th class="px-4 py-2 border-b">Product</th>
+                  <th class="px-4 py-2 border-b">Qty</th>
+                  <th class="px-4 py-2 border-b">Unit</th>
+                  <th class="px-4 py-2 border-b">Cost</th>
+                  <th class="px-4 py-2 border-b">Disc</th>
+                  <th class="px-4 py-2 border-b">Amt Paid</th>
+                  <th class="px-4 py-2 border-b">
+                    Bal
+                    <!--Balance-->
+                  </th>
+                  <th class="px-4 py-2 border-b">Returns</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Loop through user's status details -->
+                <tr v-for="(
                 receiptDetail, index
               ) in selectedPurchaseForReceipt.receiptDetails" :key="index">
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.product }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.quantity }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.unit }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.cost }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.disc }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.amtPaid }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <div class="text-center">
-                  {{ receiptDetail.bal }}
-                </div>
-              </td>
-              <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
-                <button
-                  class="px-2 py-1 flex justify-center bg-gray-400 font-bold rounded-md hover:bg-gray-200 focus:outline-none focus:ring focus:ring-gray-300"
-                  @click="openDigitalModal()">
-                  Return
-                </button>
-              </td>
-            </tr>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.product }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.quantity }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.unit }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.cost }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.disc }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.amtPaid }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <div class="text-center">
+                      {{ receiptDetail.bal }}
+                    </div>
+                  </td>
+                  <td class="px-4 py-2 whitespace-no-wrap border-b border-gray-200">
+                    <button
+                      class="px-2 py-1 flex justify-center bg-gray-400 font-bold rounded-md hover:bg-gray-200 focus:outline-none focus:ring focus:ring-gray-300"
+                      @click="openDigitalModal()">
+                      Return
+                    </button>
+                  </td>
+                </tr>
 
-            <!-- Calculate and display receipt totals -->
-            <tr>
-              <td colspan="3" class="text-md font-bold">Totals:</td>
-              <td class="font-bold text-sm text-green-500 text-center total-cell">
-                {{
-                  calculateTotal(
-                    "cost",
-                    selectedPurchaseForReceipt.receiptDetails
-                  ).toLocaleString()
-                }}
-              </td>
-              <td class="font-bold text-sm text-blue-500 text-center total-cell">
-                {{
-                  calculateTotal(
-                    "disc",
-                    selectedPurchaseForReceipt.receiptDetails
-                  ).toLocaleString()
-                }}
-              </td>
-              <td class="font-bold text-sm text-purple-500 text-center total-cell">
-                {{
-                  calculateTotal(
-                    "amtPaid",
-                    selectedPurchaseForReceipt.receiptDetails
-                  ).toLocaleString()
-                }}
-              </td>
-              <td class="font-bold text-sm text-red-500 text-center total-cell">
-                {{
-                  calculateTotal(
-                    "bal",
-                    selectedPurchaseForReceipt.receiptDetails
-                  ).toLocaleString()
-                }}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="receipt__btn">
-          <button
-            class="px-2 py-1 flex justify-center bg-yellow-400 font-bold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-yellow-300"
-            @click="openMomoPopup">
-            Momo
-          </button>
-          <button
-            class="px-2 py-1 flex justify-center bg-green-500 font-bold text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300"
-            @click="openCashPopup">
-            Cash
-          </button>
-        </div>
+                <!-- Calculate and display receipt totals -->
+                <tr>
+                  <td colspan="3" class="text-md font-bold">Totals:</td>
+                  <td class="font-bold text-sm text-green-500 text-center total-cell">
+                    {{
+                      calculateTotal(
+                        "cost",
+                        selectedPurchaseForReceipt.receiptDetails
+                      ).toLocaleString()
+                    }}
+                  </td>
+                  <td class="font-bold text-sm text-blue-500 text-center total-cell">
+                    {{
+                      calculateTotal(
+                        "disc",
+                        selectedPurchaseForReceipt.receiptDetails
+                      ).toLocaleString()
+                    }}
+                  </td>
+                  <td class="font-bold text-sm text-purple-500 text-center total-cell">
+                    {{
+                      calculateTotal(
+                        "amtPaid",
+                        selectedPurchaseForReceipt.receiptDetails
+                      ).toLocaleString()
+                    }}
+                  </td>
+                  <td class="font-bold text-sm text-red-500 text-center total-cell">
+                    {{
+                      calculateTotal(
+                        "bal",
+                        selectedPurchaseForReceipt.receiptDetails
+                      ).toLocaleString()
+                    }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="receipt__btn">
+              <button
+                class="px-2 py-1 flex justify-center bg-yellow-400 font-bold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-yellow-300"
+                @click="openMomoPopup">
+                Momo
+              </button>
+              <button
+                class="px-2 py-1 flex justify-center bg-green-500 font-bold text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300"
+                @click="openCashPopup">
+                Cash
+              </button>
+            </div>
+          </div>
+        </Transition>
       </div>
     </div>
-  </div>
+  </Transition>
 
   <!-- MOMO POPUP -->
   <div v-if="isMomoPopupVisible" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
@@ -770,5 +774,33 @@ table {
 
 .custom-min-width {
   min-width: 97%;
+}
+
+
+.modal-outer-enter-active,
+.modal-outer-leave-active {
+  transition: opacity 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
+}
+
+.modal-outer-enter-from,
+.modal-outer-leave-to {
+  opacity: 0;
+}
+
+.modal-inner-enter-active {
+  transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
+}
+
+.modal-inner-leave-active {
+  transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
+}
+
+.modal-inner-enter-from {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.modal-inner-leave-to {
+  transform: scale(0.8);
 }
 </style>
